@@ -35,6 +35,12 @@ The important asymmetry is deliberate: new code is a candidate, not the default.
 - `capabilities.json` / `integrations.json` — responsibility and host-integration inventories; they are not claims that every host was actually tested.
 - `behavior_cases.json` — model-behavior cases. They remain `not_run` until real model/tool evidence exists.
 
+## Absorption status
+
+EOG 1.1 maps the pinned Ponytail and Loopy responsibilities, but mapping is not behavioral parity. The public release does **not** yet claim replacement readiness for either project.
+
+The completion standard is defined in [`ABSORPTION_COMPLETION_PLAN.md`](ABSORPTION_COMPLETION_PLAN.md): a capability progresses from `mapped` to `implemented`, `parity_verified`, and only then `replacement_ready`. Native hosts remain inventory entries until observed in the real host. External Loop Library infrastructure remains external; EOG must still provide parity for the client workflow around it.
+
 ## Quick start
 
 Requirements: Python 3.11+; Node 22+ only for JS adapters/MCP.

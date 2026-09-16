@@ -5,7 +5,9 @@ This repository uses its own EOG definition below as the canonical engineering m
 ## Experience Optimality Gate (EOG)
 
 EOG 1.1 is the unified, always-on decision and execution method for all coding
-and engineering work. It supersedes separate UOG, Ponytail and Loopy invocation.
+and engineering work. It is intended to absorb the pinned Ponytail and Loopy local
+engineering workflows, but replacement readiness is not claimed until behavioral
+parity is verified under `ABSORPTION_COMPLETION_PLAN.md`.
 It never expands the selected task, authority, or canonical owners. Restore an
 outage first; EOG governs the lasting repair. Depth follows uncertainty and
 consequence, not an optional mode or compulsory form. Historical names preserve
@@ -177,19 +179,27 @@ boundary, never grant permission or infer arbitrary shell effects. Native tool
 permissions, owner transactions and protected CI retain authority. Missing
 material evidence blocks the claim, not unrelated safe investigation.
 
-### 10. Complete replacement, honest conformance
+### 10. Absorption completion and honest conformance
 
-The capability manifest maps full inspected UOG/Ponytail/Loopy responsibilities
-to implementation, external-wheel reuse or explicit policy change. Optional
-modes become mandatory proportional depth; user Stop remains immediate. Status
-is observed loading, not compliance; foreign benchmarks retain attribution.
+The capability manifest is a coverage inventory. `mapped` means that an upstream
+responsibility and expected behavior have been identified; it does not mean the
+behavior has been absorbed. A capability becomes replacement-ready only after an
+EOG implementation exists, behavioral parity is verified against the pinned
+baseline, and the replacement trial passes with the upstream local component
+absent or disabled. External hosted services may remain reused, but EOG still
+needs parity for the client workflow around them.
 
-Separate schema/CLI, adapter-contract, actual-host and model-behavior tests.
-Exercise positive/negative cases without legacy runtime code. Before retirement,
-inventory exact versions/configs, preserve loops/debt/customizations/provenance,
-verify rollback and test every required host with legacy components absent or
-disabled. Offline/untested hosts remain unverified. No blind deletion, privilege
-expansion or automatic uninstall from a self-written receipt.
+Optional Ponytail modes are currently a deliberate policy change to proportional
+depth, not presumed equivalence. Their utility must be covered by compatibility
+or behavioral evidence before replacement readiness. User Stop remains immediate.
+Status is observed loading, not compliance; foreign benchmarks retain attribution.
+
+Separate schema/CLI, adapter-contract, parity, actual-host and model-behavior
+tests. Manifest-presence tests establish inventory coverage only. Before
+retirement, inventory exact versions/configs, preserve loops/debt/customizations/
+provenance, verify rollback and test every required host with legacy components
+absent or disabled. Offline/untested hosts remain unverified. No blind deletion,
+privilege expansion or automatic uninstall from a self-written receipt.
 
 No EOG mode file, separate database, scheduler, agent runtime, or receipt store.
 EOG must save more total burden than its own machinery adds.
