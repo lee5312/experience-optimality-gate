@@ -1,6 +1,8 @@
 {
   "version": "1.1.0",
-  "scope": "Full inspected engineering-method functionality; external services reused, optional mode semantics explicitly superseded. This is an acceptance inventory, not proof it ran.",
+  "scope": "Coverage inventory for pinned UOG/Ponytail/Loopy responsibilities. Mapping is not behavioral parity or replacement readiness; external services may remain reused while client parity is verified.",
+  "absorption_status": "incomplete",
+  "status_model": ["mapped", "implemented", "parity_verified", "replacement_ready"],
   "upstream": {
     "uog": "AGENTS.md#experience-optimality-gate-eog",
     "ponytail": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/",
@@ -14,7 +16,7 @@
       "implementation": "AGENTS.md section 1",
       "workflow": "plan",
       "acceptance": "Human and nonhuman root cases preserve actual desired experience",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "uog.derivation",
@@ -23,7 +25,7 @@
       "implementation": "AGENTS.md section 2",
       "workflow": "plan",
       "acceptance": "Existing structural tests reject cycles/dangling refs/incorrect alternative claims",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "uog.wheel-search",
@@ -32,7 +34,7 @@
       "implementation": "AGENTS.md section 3",
       "workflow": "search",
       "acceptance": "New build without inspected sources is rejected; no unavailable-as-absence claim",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "uog.gap",
@@ -41,7 +43,7 @@
       "implementation": "AGENTS.md section 4",
       "workflow": "plan",
       "acceptance": "Novel glue/adapter also requires independent existing-option gap comparison",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "uog.selection",
@@ -50,7 +52,7 @@
       "implementation": "AGENTS.md section 5",
       "workflow": "plan",
       "acceptance": "Tradeoffs cannot silently lower required experience or hard constraints",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "uog.verification",
@@ -59,7 +61,7 @@
       "implementation": "AGENTS.md section 7",
       "workflow": "plan",
       "acceptance": "Current failed/stale observations block completion",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.core",
@@ -68,7 +70,7 @@
       "implementation": "workflows.json",
       "workflow": "plan",
       "acceptance": "Existing-wheel solution chosen; safety and user requirements retained",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.causal",
@@ -77,7 +79,7 @@
       "implementation": "workflows.json",
       "workflow": "review",
       "acceptance": "Trace sibling callers before symptom-only patch",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.review",
@@ -86,7 +88,7 @@
       "implementation": "workflows.json",
       "workflow": "review",
       "acceptance": "Compare real diff against existing/std native alternatives and correctness",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.audit",
@@ -95,7 +97,7 @@
       "implementation": "workflows.json",
       "workflow": "audit",
       "acceptance": "Rank evidence-backed ownership burden, no arbitrary deletion",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.debt",
@@ -104,7 +106,7 @@
       "implementation": "workflows.json; eog.py",
       "workflow": "debt",
       "acceptance": "Real tracked marker scan preserves legacy text and marks missing trigger",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.impact",
@@ -113,7 +115,7 @@
       "implementation": "workflows.json; eog.py",
       "workflow": "impact",
       "acceptance": "Real Git delta; no counterfactual savings; external numbers attributed",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.help",
@@ -122,7 +124,7 @@
       "implementation": "workflows.json",
       "workflow": "help",
       "acceptance": "Single EOG dispatcher exposes all operations",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.lifecycle",
@@ -131,7 +133,7 @@
       "implementation": "eog.py hook/install; AGENTS.md",
       "workflow": "doctor",
       "acceptance": "Native supported output and current core digest; malformed source not accepted",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.delegation",
@@ -140,7 +142,7 @@
       "implementation": "eog.py handoff/verify-handoff; native SubagentStart",
       "workflow": "handoff",
       "acceptance": "Different task/revision/policy or changed packet rejected",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.status",
@@ -149,7 +151,7 @@
       "implementation": "eog.py doctor; adapters/pi.mjs",
       "workflow": "doctor",
       "acceptance": "Reports digest/configuration, not false compliance/success",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.installation",
@@ -158,7 +160,7 @@
       "implementation": "eog.py install/uninstall",
       "workflow": "doctor",
       "acceptance": "Preview/CAS/idempotency/foreign settings preserved",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.portability",
@@ -167,7 +169,7 @@
       "implementation": "eog.py RULE_PATHS; integrations.json; native AGENTS",
       "workflow": "doctor",
       "acceptance": "Each claimed host tested independently; unsupported interfaces not fabricated",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.opencode",
@@ -176,7 +178,7 @@
       "implementation": "adapters/opencode.mjs",
       "workflow": "doctor",
       "acceptance": "Native transform callback, no duplicated block or foreign command overwrite",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.pi",
@@ -185,7 +187,7 @@
       "implementation": "adapters/pi.mjs",
       "workflow": "doctor",
       "acceptance": "before_agent_start fresh context; followUp for active agent",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.hermes",
@@ -194,7 +196,7 @@
       "implementation": "adapters/hermes.py",
       "workflow": "doctor",
       "acceptance": "Existing slash permission preserved; actual registration callback test",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.mcp",
@@ -203,7 +205,7 @@
       "implementation": "mcp_server.mjs using official SDK1.30.0",
       "workflow": "doctor",
       "acceptance": "Actual official client/stdIO request-response; not every-turn claim",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.regression",
@@ -212,7 +214,7 @@
       "implementation": "test_eog.py; test_runtime.py; test_adapters.mjs; test_mcp.mjs; behavior_cases.json",
       "workflow": "doctor",
       "acceptance": "Distinguish unit/contract/native/model observations; no false benchmark",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "ponytail.optional-modes",
@@ -230,7 +232,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "discover",
       "acceptance": "Two distinct observed recurrences or clearly inferred opportunity",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.find",
@@ -248,7 +250,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "craft",
       "acceptance": "Ask only missing material facts; no fake technology/budget",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.adapt",
@@ -257,7 +259,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "adapt",
       "acceptance": "Preserve source/intent and expose only justified changed conditions",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.loop-audit",
@@ -266,7 +268,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "loop-audit",
       "acceptance": "Cycle/failure/stagnation/authority/overfit review",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.run",
@@ -275,7 +277,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "run",
       "acceptance": "Same current agent; check-loop and check-receipt; no hidden scheduler",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.debrief",
@@ -284,7 +286,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "debrief",
       "acceptance": "Observed receipt, not speculative prompt rewrite",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.save",
@@ -293,7 +295,7 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "save",
       "acceptance": "CAS append preserves legacy LOOPS.md and exact definition",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "loopy.publish",
@@ -320,7 +322,7 @@
       "implementation": "eog.py gate/pretool",
       "workflow": "plan",
       "acceptance": "Mismatched record denied on configured native boundary; valid result never grants ALLOW",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     },
     {
       "id": "eog.retirement",
@@ -329,7 +331,7 @@
       "implementation": "eog.py replacement-check; capabilities.json",
       "workflow": "doctor",
       "acceptance": "Missing host/capability/rollback evidence cannot authorize removal",
-      "disposition": "absorbed"
+      "disposition": "mapped"
     }
   ]
 }
