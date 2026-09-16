@@ -553,6 +553,9 @@ def check_receipt(receipt: Any) -> list[str]:
 
 
 def main() -> int:
+    # CLI pipes and MCP carry UTF-8 on every platform, independent of console locale.
+    for stream in (sys.stdout,sys.stderr):
+        if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8',newline='\n')
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--root',type=Path,default=DEFAULT_ROOT)
     sub=ap.add_subparsers(dest='command',required=True)

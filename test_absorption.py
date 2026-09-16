@@ -163,7 +163,7 @@ class AbsorptionTests(unittest.TestCase):
 
     def test_preserved_reference_integrity_and_no_missing_fallback(self):
         w=eog.workflows()['run'];text=operation.references(w)
-        raw=(eog.HERE/'skill/references/loopy-run.md').read_text()
+        raw=(eog.HERE/'skill/references/loopy-run.md').read_text(encoding='utf-8')
         self.assertIn(raw,text)
         with patch.object(Path,'read_bytes',return_value=b'changed'):
             with self.assertRaises(ValueError):operation.references(w)
@@ -176,7 +176,7 @@ class AbsorptionTests(unittest.TestCase):
         for name,ref in cases.items():
             with self.subTest(name=name):
                 text=eog.instructions(self.root,name)
-                self.assertIn((eog.HERE/'skill/references'/ref).read_text(),text)
+                self.assertIn((eog.HERE/'skill/references'/ref).read_text(encoding='utf-8'),text)
 
     def test_legacy_command_alias_reaches_same_operation(self):
         self.assertEqual(eog.instructions(self.root,'ponytail-review'),eog.instructions(self.root,'review'))
@@ -221,7 +221,7 @@ class AbsorptionTests(unittest.TestCase):
         self.save(prompt)
         rows=library.saved_entries(self.root)
         self.assertEqual(len(rows),1);self.assertEqual(rows[0]['prompt'],prompt)
-        self.assertEqual(eog.saved_loops((self.root/'LOOPS.md').read_text()),[])
+        self.assertEqual(eog.saved_loops((self.root/'LOOPS.md').read_text(encoding='utf-8')),[])
 
     def test_unterminated_structured_loop_rejected(self):
         with self.assertRaises(ValueError):eog.saved_loops('```eog-loop\n{}')
@@ -248,5 +248,11 @@ class AbsorptionTests(unittest.TestCase):
             r=subprocess.run([sys.executable,str(eog.HERE/'eog.py'),'--root',str(self.root),'library-stdin'],input=json.dumps(request),capture_output=True,text=True)
             self.assertNotEqual(r.returncode,0)
         self.assertFalse((self.root/'LOOPS.md').exists())
+
+    def test_cli_procedure_stdout_is_utf8(self):
+        r=subprocess.run([sys.executable,str(eog.HERE/'eog.py'),'--root',str(self.root),'prompt','--workflow','impact'],capture_output=True)
+        self.assertEqual(r.returncode,0,r.stderr)
+        expected=(eog.HERE/'skill/references/ponytail-gain.md').read_bytes().decode('utf-8')
+        self.assertIn(expected,r.stdout.decode('utf-8'))
 
 if __name__=='__main__':unittest.main()
