@@ -1,0 +1,4 @@
+interface:
+  display_name: "EOG"
+  short_description: "Experience-first engineering, reuse, review and bounded loops"
+  default_prompt: "Apply EOG from the current AGENTS.md, using the existing agent and canonical work owner."

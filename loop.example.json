@@ -1,0 +1,34 @@
+{
+  "id": "example-readonly-loop",
+  "title": "SYNTHETIC: title",
+  "revision": "SYNTHETIC: revision",
+  "actor": "SYNTHETIC: actor",
+  "context": "SYNTHETIC: context",
+  "experience": "SYNTHETIC: experience",
+  "observe": "SYNTHETIC: observe",
+  "choose": "SYNTHETIC: choose",
+  "act": "SYNTHETIC: act",
+  "verify": "SYNTHETIC: verify",
+  "record_owner": "SYNTHETIC: record_owner",
+  "source": "SYNTHETIC: source",
+  "boundary": {
+    "kind": "no_progress",
+    "condition": "Stop when no new evidence changes the next action"
+  },
+  "authority": {
+    "allowed": [
+      "Read scoped fixture"
+    ],
+    "forbidden": [
+      "Write or send externally"
+    ],
+    "approval_required": [
+      "Any scope change"
+    ]
+  },
+  "stop": {
+    "success": "Expected consumer output observed",
+    "blocked": "Missing required source",
+    "stagnated": "No new evidence"
+  }
+}

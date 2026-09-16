@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EOG observed run receipt (not an approval or truth certificate)",
+  "type": "object",
+  "properties": {
+    "definition": {
+      "type": "object"
+    },
+    "definition_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "work_owner": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "subject_revision": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "observed_at": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "baseline": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "choice": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "changed": {
+            "type": "boolean"
+          },
+          "verification": {
+            "type": "object",
+            "properties": {
+              "result": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "unavailable"
+                ]
+              },
+              "locator": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "observation": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "subject_revision": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            },
+            "required": [
+              "result",
+              "locator",
+              "observation",
+              "subject_revision"
+            ],
+            "additionalProperties": false
+          },
+          "next_learning": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sequence",
+          "observed_at",
+          "baseline",
+          "choice",
+          "action",
+          "changed",
+          "verification",
+          "next_learning"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "outcome": {
+      "enum": [
+        "success",
+        "clean_noop",
+        "blocked",
+        "approval_required",
+        "exhausted",
+        "stagnated"
+      ]
+    },
+    "acceptance": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "enum": [
+            "passed",
+            "failed",
+            "unavailable"
+          ]
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "subject_revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "result",
+        "locator",
+        "observation",
+        "subject_revision"
+      ],
+      "additionalProperties": false
+    },
+    "residual": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "definition",
+    "definition_sha256",
+    "scope",
+    "work_owner",
+    "subject_revision",
+    "steps",
+    "outcome",
+    "residual"
+  ],
+  "additionalProperties": false
+}

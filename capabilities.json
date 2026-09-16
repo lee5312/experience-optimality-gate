@@ -1,0 +1,335 @@
+{
+  "version": "1.1.0",
+  "scope": "Full inspected engineering-method functionality; external services reused, optional mode semantics explicitly superseded. This is an acceptance inventory, not proof it ran.",
+  "upstream": {
+    "uog": "AGENTS.md#experience-optimality-gate-eog",
+    "ponytail": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/",
+    "loopy": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/"
+  },
+  "capabilities": [
+    {
+      "id": "uog.experience",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Complete consumer outcome, process, failure and lifecycle",
+      "implementation": "AGENTS.md section 1",
+      "workflow": "plan",
+      "acceptance": "Human and nonhuman root cases preserve actual desired experience",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "uog.derivation",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Derived goal DAG, source constraints, candidate alternatives",
+      "implementation": "AGENTS.md section 2",
+      "workflow": "plan",
+      "acceptance": "Existing structural tests reject cycles/dangling refs/incorrect alternative claims",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "uog.wheel-search",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Actual local, standard, theory, product and OSS search",
+      "implementation": "AGENTS.md section 3",
+      "workflow": "search",
+      "acceptance": "New build without inspected sources is rejected; no unavailable-as-absence claim",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "uog.gap",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Evidence-backed minimal novel responsibility",
+      "implementation": "AGENTS.md section 4",
+      "workflow": "plan",
+      "acceptance": "Novel glue/adapter also requires independent existing-option gap comparison",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "uog.selection",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Non-dominated comparison, total burden, exitability",
+      "implementation": "AGENTS.md section 5",
+      "workflow": "plan",
+      "acceptance": "Tradeoffs cannot silently lower required experience or hard constraints",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "uog.verification",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Root acceptance distinct from structural/design pass",
+      "implementation": "AGENTS.md section 7",
+      "workflow": "plan",
+      "acceptance": "Current failed/stale observations block completion",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.core",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail/SKILL.md",
+      "responsibility": "YAGNI/reuse/native/minimality without correctness regression",
+      "implementation": "workflows.json",
+      "workflow": "plan",
+      "acceptance": "Existing-wheel solution chosen; safety and user requirements retained",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.causal",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail/SKILL.md",
+      "responsibility": "Understand actual flow and shared root cause",
+      "implementation": "workflows.json",
+      "workflow": "review",
+      "acceptance": "Trace sibling callers before symptom-only patch",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.review",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-review/SKILL.md",
+      "responsibility": "Scoped complexity review",
+      "implementation": "workflows.json",
+      "workflow": "review",
+      "acceptance": "Compare real diff against existing/std native alternatives and correctness",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.audit",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-audit/SKILL.md",
+      "responsibility": "Whole-scope repository complexity audit",
+      "implementation": "workflows.json",
+      "workflow": "audit",
+      "acceptance": "Rank evidence-backed ownership burden, no arbitrary deletion",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.debt",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-debt/SKILL.md",
+      "responsibility": "Harvest legacy and current shortcuts/ceilings/triggers",
+      "implementation": "workflows.json; eog.py",
+      "workflow": "debt",
+      "acceptance": "Real tracked marker scan preserves legacy text and marks missing trigger",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.impact",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-gain/SKILL.md",
+      "responsibility": "Measured impact with valid baselines/attribution",
+      "implementation": "workflows.json; eog.py",
+      "workflow": "impact",
+      "acceptance": "Real Git delta; no counterfactual savings; external numbers attributed",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.help",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-help/SKILL.md",
+      "responsibility": "Usable command reference",
+      "implementation": "workflows.json",
+      "workflow": "help",
+      "acceptance": "Single EOG dispatcher exposes all operations",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.lifecycle",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/hooks/claude-codex-hooks.json",
+      "responsibility": "Session/turn/resume/compaction refresh",
+      "implementation": "eog.py hook/install; AGENTS.md",
+      "workflow": "doctor",
+      "acceptance": "Native supported output and current core digest; malformed source not accepted",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.delegation",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/hooks/ponytail-subagent.js",
+      "responsibility": "Subagent context and identity binding",
+      "implementation": "eog.py handoff/verify-handoff; native SubagentStart",
+      "workflow": "handoff",
+      "acceptance": "Different task/revision/policy or changed packet rejected",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.status",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/hooks/ponytail-statusline.sh",
+      "responsibility": "Visible source/loading state",
+      "implementation": "eog.py doctor; adapters/pi.mjs",
+      "workflow": "doctor",
+      "acceptance": "Reports digest/configuration, not false compliance/success",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.installation",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/scripts/uninstall.js",
+      "responsibility": "Install/update/remove only owned native integration",
+      "implementation": "eog.py install/uninstall",
+      "workflow": "doctor",
+      "acceptance": "Preview/CAS/idempotency/foreign settings preserved",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.portability",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md",
+      "responsibility": "Native instruction/rule delivery across host families",
+      "implementation": "eog.py RULE_PATHS; integrations.json; native AGENTS",
+      "workflow": "doctor",
+      "acceptance": "Each claimed host tested independently; unsupported interfaces not fabricated",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.opencode",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/.opencode/plugins/ponytail.mjs",
+      "responsibility": "Every-turn native OpenCode integration",
+      "implementation": "adapters/opencode.mjs",
+      "workflow": "doctor",
+      "acceptance": "Native transform callback, no duplicated block or foreign command overwrite",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.pi",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/pi-extension/index.js",
+      "responsibility": "Every-turn Pi commands/status and active-turn queue",
+      "implementation": "adapters/pi.mjs",
+      "workflow": "doctor",
+      "acceptance": "before_agent_start fresh context; followUp for active agent",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.hermes",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/__init__.py",
+      "responsibility": "Hermes pre-LLM, skills/command and gateway access",
+      "implementation": "adapters/hermes.py",
+      "workflow": "doctor",
+      "acceptance": "Existing slash permission preserved; actual registration callback test",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.mcp",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/ponytail-mcp/README.md",
+      "responsibility": "Portable user-invoked prompt/tool fallback",
+      "implementation": "mcp_server.mjs using official SDK1.30.0",
+      "workflow": "doctor",
+      "acceptance": "Actual official client/stdIO request-response; not every-turn claim",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.regression",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/scripts/check-rule-copies.js",
+      "responsibility": "Source, adapter and behavioral regressions",
+      "implementation": "test_eog.py; test_runtime.py; test_adapters.mjs; test_mcp.mjs; behavior_cases.json",
+      "workflow": "doctor",
+      "acceptance": "Distinguish unit/contract/native/model observations; no false benchmark",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "ponytail.optional-modes",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/hooks/ponytail-config.js",
+      "responsibility": "Optional off/lite/full/ultra and output-style modes",
+      "implementation": "AGENTS.md sections 1/5/10; workflow selection",
+      "workflow": "help",
+      "acceptance": "Explicitly replaced with mandatory proportional depth; user Stop preserved; no weakening via mode file",
+      "disposition": "policy_change"
+    },
+    {
+      "id": "loopy.discover",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/discover.md",
+      "responsibility": "Find repeatable engineering work",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "discover",
+      "acceptance": "Two distinct observed recurrences or clearly inferred opportunity",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.find",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "responsibility": "Find/rank published or project-saved loops",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "find",
+      "acceptance": "Exact live catalog/source digest; explicit unavailable if fetch fails",
+      "disposition": "external_reuse"
+    },
+    {
+      "id": "loopy.craft",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "responsibility": "Guided bounded-loop design",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "craft",
+      "acceptance": "Ask only missing material facts; no fake technology/budget",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.adapt",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "responsibility": "Adapt a real exact-version definition",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "adapt",
+      "acceptance": "Preserve source/intent and expose only justified changed conditions",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.loop-audit",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/audit.md",
+      "responsibility": "Loop Doctor and material repair",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "loop-audit",
+      "acceptance": "Cycle/failure/stagnation/authority/overfit review",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.run",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/run.md",
+      "responsibility": "Bounded execute and record actual result",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "run",
+      "acceptance": "Same current agent; check-loop and check-receipt; no hidden scheduler",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.debrief",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/debrief.md",
+      "responsibility": "Evidence-based run diagnosis and improvement",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "debrief",
+      "acceptance": "Observed receipt, not speculative prompt rewrite",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.save",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "responsibility": "Save/update/reuse existing project loops",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "save",
+      "acceptance": "CAS append preserves legacy LOOPS.md and exact definition",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "loopy.publish",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/publish.md",
+      "responsibility": "Preview and separately authorized external publication",
+      "implementation": "workflows.json; eog.py; loop/receipt schemas",
+      "workflow": "publish",
+      "acceptance": "Current provider contract plus approval and readback; no invented endpoint",
+      "disposition": "external_reuse"
+    },
+    {
+      "id": "loopy.library-service",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/README.md",
+      "responsibility": "Existing Loop Library hosting/catalog/auth/voting",
+      "implementation": "Live external provider; no copied worker/database",
+      "workflow": "find",
+      "acceptance": "Retain access to the external service independently of local Loopy skill; never claim service is locally absorbed",
+      "disposition": "external_reuse"
+    },
+    {
+      "id": "eog.typed-admission",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Task/revision-bound structural admission without privilege grants",
+      "implementation": "eog.py gate/pretool",
+      "workflow": "plan",
+      "acceptance": "Mismatched record denied on configured native boundary; valid result never grants ALLOW",
+      "disposition": "absorbed"
+    },
+    {
+      "id": "eog.retirement",
+      "source": "AGENTS.md#experience-optimality-gate-eog",
+      "responsibility": "Safe replacement and rollback evidence",
+      "implementation": "eog.py replacement-check; capabilities.json",
+      "workflow": "doctor",
+      "acceptance": "Missing host/capability/rollback evidence cannot authorize removal",
+      "disposition": "absorbed"
+    }
+  ]
+}

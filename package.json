@@ -1,0 +1,30 @@
+{
+  "name": "@paralloff/eog",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Experience-first engineering gate for existing agents and tools",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test:adapters": "node --test test_adapters.mjs",
+    "test:mcp": "node --test test_mcp.mjs"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/sdk": {
+      "optional": true
+    }
+  },
+  "exports": {
+    "./opencode": "./adapters/opencode.mjs",
+    "./pi": "./adapters/pi.mjs"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "scope": {
+    "boundary": "SYNTHETIC EXAMPLE: caller requests a reversible transformation",
+    "work_owner": "Example only; not live Kaban or an actual decision",
+    "subject_revision": "fixture-v1"
+  },
+  "experiences": [
+    {
+      "id": "E1",
+      "actor": {
+        "kind": "program",
+        "role": "Library caller"
+      },
+      "context": "The caller provides a value",
+      "intent": "Obtain a transformed value without changing its input",
+      "target": "Receive the intended transformation while retaining the original value",
+      "failure_target": "Receive an explicit failure and keep the original value"
+    }
+  ],
+  "goals": [
+    {
+      "id": "G1",
+      "statement": "Do not mutate the caller input",
+      "supports": [
+        "E1"
+      ],
+      "why": "The caller must still be able to use its original value",
+      "status": "required"
+    }
+  ],
+  "refinements": [
+    {
+      "parent": "E1",
+      "alternatives": [
+        [
+          "G1"
+        ]
+      ],
+      "why": "Example contribution only; not a claim of logical sufficiency"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "C1",
+      "statement": "No external side effects",
+      "source_ids": [
+        "R1"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "A1",
+      "target": "E1",
+      "method": "Invoke as the real caller on normal and rejected input",
+      "pass_condition": "The caller receives the expected value/error and keeps the original"
+    },
+    {
+      "id": "A2",
+      "target": "G1",
+      "method": "Compare input before/after invocation",
+      "pass_condition": "Input is unchanged"
+    },
+    {
+      "id": "A3",
+      "target": "C1",
+      "method": "Observe the applicable side-effect boundary",
+      "pass_condition": "No external side effects"
+    }
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "locator": "fixture://user-contract",
+      "revision": "fixture-v1",
+      "checked_at": "2026-09-16T00:00:00Z",
+      "finding": "Synthetic user contract; not evidence about a real application"
+    },
+    {
+      "id": "R2",
+      "locator": "fixture://native-capability",
+      "revision": "fixture-v1",
+      "checked_at": "2026-09-16T00:00:00Z",
+      "finding": "Synthetic inspected native option; replace with a real primary source in live use"
+    }
+  ],
+  "wheel_search": {
+    "coverage": [
+      {
+        "category": "project",
+        "status": "checked",
+        "basis": "Synthetic inspection of baseline/native fit",
+        "source_ids": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "category": "stdlib",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "platform",
+        "status": "checked",
+        "basis": "Synthetic inspection of baseline/native fit",
+        "source_ids": [
+          "R1",
+          "R2"
+        ]
+      },
+      {
+        "category": "installed",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "standards_theory",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "products",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "open_source",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "composition",
+        "status": "not_applicable",
+        "basis": "Fixture scope only; justify applicability from real context in a live record",
+        "source_ids": []
+      },
+      {
+        "category": "noop_wait",
+        "status": "checked",
+        "basis": "Synthetic inspection of baseline/native fit",
+        "source_ids": [
+          "R1",
+          "R2"
+        ]
+      }
+    ],
+    "queries_or_inspections": [
+      "SYNTHETIC: inspect current behavior and native capability for this example"
+    ],
+    "stop_reason": "Fixture bounds only; no claim of an actual market/OSS search"
+  },
+  "candidates": [
+    {
+      "id": "W0",
+      "name": "Leave current behavior unchanged",
+      "kind": "noop",
+      "disposition": "rejected",
+      "assessments": [
+        {
+          "target": "E1",
+          "fit": "unmet",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "target": "G1",
+          "fit": "unmet",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "target": "C1",
+          "fit": "unmet",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "source_ids": [
+        "R1",
+        "R2"
+      ],
+      "tradeoffs": "Illustrative reuse versus missing capability only",
+      "novel_parts": [],
+      "gap_ids": []
+    },
+    {
+      "id": "W1",
+      "name": "Use the existing native capability",
+      "kind": "reuse",
+      "disposition": "viable",
+      "assessments": [
+        {
+          "target": "E1",
+          "fit": "expected",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "target": "G1",
+          "fit": "expected",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "target": "C1",
+          "fit": "expected",
+          "basis": "Synthetic case, not real evidence",
+          "source_ids": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "source_ids": [
+        "R1",
+        "R2"
+      ],
+      "tradeoffs": "Illustrative reuse versus missing capability only",
+      "novel_parts": [],
+      "gap_ids": []
+    }
+  ],
+  "gaps": [],
+  "implementation": [],
+  "unknowns": [],
+  "decision": {
+    "status": "design_pass",
+    "selected": "W1",
+    "rationale": "Synthetic native reuse candidate fits without new ownership",
+    "source_ids": [
+      "R1",
+      "R2"
+    ],
+    "invalidated_by": [
+      "Actual source inspection contradicts the assumed capability"
+    ]
+  },
+  "evidence": [],
+  "execution": {
+    "outcome": "not_started",
+    "reason": "Synthetic record used to exercise structural validation only",
+    "changed": false
+  }
+}

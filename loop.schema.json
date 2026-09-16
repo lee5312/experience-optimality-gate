@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EOG bounded loop definition 1",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,99}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "experience": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "observe": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "choose": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "act": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "verify": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "record_owner": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "boundary": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "no_progress",
+            "worklist",
+            "user_limit"
+          ]
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "kind",
+        "condition"
+      ],
+      "additionalProperties": false
+    },
+    "authority": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        },
+        "approval_required": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "required": [
+        "allowed",
+        "forbidden",
+        "approval_required"
+      ],
+      "additionalProperties": false
+    },
+    "stop": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "clean_noop": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "blocked": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "approval_required": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "exhausted": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "stagnated": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "success",
+        "blocked",
+        "stagnated"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "revision",
+    "actor",
+    "context",
+    "experience",
+    "observe",
+    "choose",
+    "act",
+    "verify",
+    "record_owner",
+    "source",
+    "boundary",
+    "authority",
+    "stop"
+  ],
+  "additionalProperties": false
+}

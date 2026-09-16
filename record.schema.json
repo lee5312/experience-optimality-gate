@@ -1,0 +1,862 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EOG 1.0 material decision record",
+  "$comment": "AGENTS.md#experience-optimality-gate-eog owns normative meaning. This schema and validate.py check structure, not truth, authority, global optimality, or actual model compliance.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "boundary": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "work_owner": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "subject_revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "boundary",
+        "work_owner",
+        "subject_revision"
+      ],
+      "additionalProperties": false
+    },
+    "experiences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/experience"
+      },
+      "minItems": 1
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/goal"
+      },
+      "minItems": 0
+    },
+    "refinements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/refinement"
+      },
+      "minItems": 0
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/constraint"
+      },
+      "minItems": 0
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/check"
+      },
+      "minItems": 1
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      },
+      "minItems": 1
+    },
+    "wheel_search": {
+      "type": "object",
+      "properties": {
+        "coverage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/coverage"
+          },
+          "minItems": 9
+        },
+        "queries_or_inspections": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 1
+        },
+        "stop_reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "coverage",
+        "queries_or_inspections",
+        "stop_reason"
+      ],
+      "additionalProperties": false
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/candidate"
+      },
+      "minItems": 1
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      },
+      "minItems": 0
+    },
+    "implementation": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/element"
+      },
+      "minItems": 0
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unknown"
+      },
+      "minItems": 0
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "provisional",
+            "design_pass",
+            "rejected"
+          ]
+        },
+        "selected": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "invalidated_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "status",
+        "selected",
+        "rationale",
+        "source_ids",
+        "invalidated_by"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "minItems": 0
+    },
+    "execution": {
+      "type": "object",
+      "properties": {
+        "outcome": {
+          "enum": [
+            "not_started",
+            "running",
+            "success",
+            "clean_noop",
+            "blocked",
+            "approval_required",
+            "exhausted",
+            "stagnated"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "changed": {
+          "type": "boolean"
+        },
+        "limit_source": {
+          "$ref": "#/$defs/id"
+        }
+      },
+      "required": [
+        "outcome",
+        "reason",
+        "changed"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "scope",
+    "experiences",
+    "goals",
+    "refinements",
+    "constraints",
+    "checks",
+    "sources",
+    "wheel_search",
+    "candidates",
+    "gaps",
+    "implementation",
+    "unknowns",
+    "decision",
+    "evidence",
+    "execution"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9_-]*$"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "checked_at": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "finding": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "locator",
+        "revision",
+        "checked_at",
+        "finding"
+      ],
+      "additionalProperties": false
+    },
+    "experience": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "actor": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "human",
+                "agent",
+                "program",
+                "service",
+                "device",
+                "other"
+              ]
+            },
+            "role": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "kind",
+            "role"
+          ],
+          "additionalProperties": false
+        },
+        "context": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "failure_target": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "priority": {
+          "enum": [
+            "required",
+            "preference"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "actor",
+        "context",
+        "intent",
+        "target",
+        "failure_target"
+      ],
+      "additionalProperties": false
+    },
+    "goal": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "status": {
+          "enum": [
+            "required",
+            "provisional"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "supports",
+        "why",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "constraint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "statement",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "check": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "target": {
+          "$ref": "#/$defs/id"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "pass_condition": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "method",
+        "pass_condition"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "check": {
+          "$ref": "#/$defs/id"
+        },
+        "subject_revision": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "observed_at": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "result": {
+          "enum": [
+            "passed",
+            "failed",
+            "unavailable"
+          ]
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "check",
+        "subject_revision",
+        "observed_at",
+        "locator",
+        "result",
+        "observation"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "enum": [
+            "project",
+            "stdlib",
+            "platform",
+            "installed",
+            "standards_theory",
+            "products",
+            "open_source",
+            "composition",
+            "noop_wait"
+          ]
+        },
+        "status": {
+          "enum": [
+            "checked",
+            "not_applicable",
+            "unavailable"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "category",
+        "status",
+        "basis",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/id"
+        },
+        "fit": {
+          "enum": [
+            "expected",
+            "met",
+            "unmet",
+            "unknown"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "target",
+        "fit",
+        "basis",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "kind": {
+          "enum": [
+            "noop",
+            "wait",
+            "reuse",
+            "configure",
+            "compose",
+            "adapt",
+            "extend",
+            "new"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "viable",
+            "dominated",
+            "rejected"
+          ]
+        },
+        "assessments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assessment"
+          },
+          "minItems": 1
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "tradeoffs": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "novel_parts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "minItems": 0
+        },
+        "gap_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "dominated_by": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "dominance_basis": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "disposition",
+        "assessments",
+        "source_ids",
+        "tradeoffs",
+        "novel_parts",
+        "gap_ids"
+      ],
+      "additionalProperties": false
+    },
+    "gap": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "compared_candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "residual": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "why_not_adapt": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "minimum_novelty": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "targets",
+        "compared_candidates",
+        "source_ids",
+        "residual",
+        "why_not_adapt",
+        "minimum_novelty"
+      ],
+      "additionalProperties": false
+    },
+    "element": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "candidate": {
+          "$ref": "#/$defs/id"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "novel": {
+          "type": "boolean"
+        },
+        "gap_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "candidate",
+        "supports",
+        "novel",
+        "gap_ids"
+      ],
+      "additionalProperties": false
+    },
+    "unknown": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "decisive": {
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "open",
+            "resolved"
+          ]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "resolution": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "id",
+        "question",
+        "decisive",
+        "state",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    },
+    "refinement": {
+      "type": "object",
+      "properties": {
+        "parent": {
+          "$ref": "#/$defs/id"
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/id"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "minItems": 1
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      },
+      "required": [
+        "parent",
+        "alternatives",
+        "why"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

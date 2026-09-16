@@ -1,0 +1,195 @@
+{
+  "version": "1.1.0",
+  "host_inventory": [
+    {
+      "host": "Codex CLI",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Codex VS Code",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Amp",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Jules",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Zed",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "CodeWhale",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Antigravity",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Copilot CLI",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Qoder",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Swival",
+      "delivery": "AGENTS.md + skill/SKILL.md",
+      "tier": "native-instruction",
+      "native_verified": false,
+      "limits": "Verify host discovery/override rules. This distribution does not claim all vendor plugin storefronts installed."
+    },
+    {
+      "host": "Codex",
+      "delivery": "eog.py install --host codex",
+      "tier": "native-hook",
+      "native_verified": false,
+      "limits": "POSIX hook command generation; native project rules/AGENTS remain portable on Windows. Cursor uses documented sessionStart/postToolUse, not unsupported SubagentStart context."
+    },
+    {
+      "host": "Claude Code",
+      "delivery": "eog.py install --host claude",
+      "tier": "native-hook",
+      "native_verified": false,
+      "limits": "POSIX hook command generation; native project rules/AGENTS remain portable on Windows. Cursor uses documented sessionStart/postToolUse, not unsupported SubagentStart context."
+    },
+    {
+      "host": "Cursor",
+      "delivery": "eog.py install --host cursor; cursor-rule alternative",
+      "tier": "native-hook",
+      "native_verified": false,
+      "limits": "POSIX hook command generation; native project rules/AGENTS remain portable on Windows. Cursor uses documented sessionStart/postToolUse, not unsupported SubagentStart context."
+    },
+    {
+      "host": "Windsurf",
+      "delivery": "eog.py install --host windsurf",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Cline",
+      "delivery": "eog.py install --host cline",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Kiro",
+      "delivery": "eog.py install --host kiro",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Qoder rules",
+      "delivery": "eog.py install --host qoder-rule",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "GitHub Copilot",
+      "delivery": "eog.py install --host copilot-rule",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Gemini CLI",
+      "delivery": "eog.py install --host gemini",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Junie",
+      "delivery": "eog.py install --host junie",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Claude rules",
+      "delivery": "eog.py install --host claude-rule",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "Cursor rules",
+      "delivery": "eog.py install --host cursor-rule",
+      "tier": "generated-rule",
+      "native_verified": false,
+      "limits": "Preview and CAS write; Junie requires its native guidelines-path selection. No unsupported auto-install claim."
+    },
+    {
+      "host": "OpenCode",
+      "delivery": "adapters/opencode.mjs",
+      "tier": "native-extension",
+      "native_verified": false,
+      "limits": "Actual native loading and behavior require per-host acceptance."
+    },
+    {
+      "host": "Pi",
+      "delivery": "adapters/pi.mjs",
+      "tier": "native-extension",
+      "native_verified": false,
+      "limits": "Actual native loading and behavior require per-host acceptance."
+    },
+    {
+      "host": "Hermes",
+      "delivery": "adapters/hermes.py",
+      "tier": "native-extension",
+      "native_verified": false,
+      "limits": "Actual native loading and behavior require per-host acceptance."
+    },
+    {
+      "host": "Grok Build / generic skill hosts",
+      "delivery": "skill/SKILL.md; eog.py prompt",
+      "tier": "skill",
+      "native_verified": false,
+      "limits": "Use actual host skill loading; passive hooks do not universally inject."
+    },
+    {
+      "host": "Generic MCP",
+      "delivery": "mcp_server.mjs",
+      "tier": "read-only MCP",
+      "native_verified": false,
+      "limits": "User-invoked fallback; NOT always-on context or a permission broker."
+    }
+  ],
+  "reference": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/docs/agent-portability.md"
+}
