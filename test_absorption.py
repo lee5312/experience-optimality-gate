@@ -255,4 +255,10 @@ class AbsorptionTests(unittest.TestCase):
         expected=(eog.HERE/'skill/references/ponytail-gain.md').read_bytes().decode('utf-8')
         self.assertIn(expected,r.stdout.decode('utf-8'))
 
+    def test_custom_policy_refresh_preserves_exact_amendment(self):
+        path=self.root/'AGENTS.md'
+        with path.open('a',encoding='utf-8') as f:f.write('\nCUSTOM_CONSTRAINT: preserve special device selection.\n')
+        self.assertIn('CUSTOM_CONSTRAINT: preserve special device selection.',eog.refresh(self.root))
+        self.assertEqual(eog.refresh(self.root),eog.policy(self.root)['text'])
+
 if __name__=='__main__':unittest.main()

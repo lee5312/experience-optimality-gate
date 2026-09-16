@@ -45,7 +45,8 @@ The completion standard is defined in [`ABSORPTION_COMPLETION_PLAN.md`](ABSORPTI
 
 Use the rules with your existing agent; no new agent or service is installed.
 Small edits do not require a JSON record. Load detailed procedures only for the
-operation you need.
+operation you need. Compact refresh is used only for the exact bundled policy;
+custom or amended EOG policy is delivered in full, never silently compressed away.
 
 Requirements: Python 3.11+; Node 22+ for the portable launcher, adapters or MCP.
 

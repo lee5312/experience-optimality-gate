@@ -17,6 +17,11 @@ def resolve_workflow(name):
 
 
 def compact_core(policy):
+    # The compact projection is valid only for this exact bundled policy.
+    # Custom or amended project policy must never be silently compressed away.
+    from eog import policy as read_policy
+    if policy['policy_sha256'] != read_policy(HERE)['policy_sha256']:
+        return policy['text']
     return (
         '## Experience Optimality Gate (EOG)\n'
         'Consumer experience is the objective, including failure and continuity. '
