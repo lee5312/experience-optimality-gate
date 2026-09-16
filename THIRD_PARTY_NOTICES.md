@@ -59,3 +59,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+The complete pinned skill texts under skill/references are redistributed under
+the respective MIT licenses stored beside them. reference-lock.json records each
+source path, revision and SHA-256. Upstream benchmark statements remain attributed
+to Ponytail and are not EOG measurements.

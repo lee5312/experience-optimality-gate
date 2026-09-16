@@ -1,4 +1,6 @@
 import test from 'node:test';
+import {existsSync} from 'node:fs';
+import path from 'node:path';
 import assert from 'node:assert/strict';
 import {appendContext,commandPrompt,parseCommand,context} from './bridge.mjs';
 import openCode from './adapters/opencode.mjs';
@@ -40,4 +42,15 @@ test('Pi absent base is not literal undefined and idle runs on same host',async(
 test('Pi status says source loaded, not compliance verified',async()=>{
  const cb={},statuses=[];piExtension({on:(k,f)=>cb[k]=f,registerCommand:()=>{},sendUserMessage:()=>{}});
  await cb.session_start({}, {ui:{setStatus:(...a)=>statuses.push(a)}});assert.match(statuses[0][1],/compliance unverified/);
+});
+
+test('OpenCode registered skill path exists in the actual package',async()=>{
+ const plugin=await openCode();const cfg={};await plugin.config(cfg);
+ assert.ok(cfg.skills.paths.every(p=>existsSync(path.join(p,'eog','SKILL.md'))));
+});
+test('native refresh avoids injecting the entire upstream procedure every turn',()=>{
+ const text=appendContext('foreign');assert.ok(text.length<3000);
+ assert.doesNotMatch(text,/Preserved upstream procedure/);
+ assert.match(commandPrompt('repair exact loop'),/loopy-audit.md/);
+ assert.match(commandPrompt('/ponytail-review file'),/ponytail-review.md/);
 });
