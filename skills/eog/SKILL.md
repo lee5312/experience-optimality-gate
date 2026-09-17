@@ -1,29 +1,31 @@
 ---
 name: eog
-description: Experience-first engineering; review, audit, debt, impact; discover, find, compare, craft, adapt, repair, run, debrief, save and publish bounded loops on the existing agent.
+description: >
+  Judgment support for capable engineering agents: experience, intelligent choice,
+  minimal ownership, useful feedback, and narrow integrity guards. Includes UOG,
+  Ponytail, and Loopy compatibility without requiring three separate methods.
 ---
 
-# EOG
+# EOG 2.0
 
-Use current project AGENTS.md and user authority. Small edits need concise judgment,
-not a material-decision JSON form. Never drop requested behavior.
-Locate bin/eog.mjs at the package root, two directories above this file.
-Run `node <package>/bin/eog.mjs --root <project> prompt --workflow <operation>`.
-The result contains the full relevant pinned upstream procedure and EOG integration
-contract. YOU execute the semantic work with existing host tools. Returning the
-instructions is not completion. Load only the needed operation.
+Read the current canonical `## Experience Optimality Gate (EOG)` section first.
+EOG assists judgment; it is not a checklist or state machine. Use the existing
+agent and authorized tools. Do not create another runtime, scheduler, database,
+or persistent mode.
 
-Operations: plan, search, review, audit, debt, impact, help; discover, find, compare,
-craft, adapt, loop-audit, loop-repair, run, debrief, save, publish; handoff and doctor.
-`repair` and `loop-doctor` are aliases. Native Loopy text needs no JSON conversion.
-Use find-loop, saved-loops, compare-loops and save-text for actual loop data.
-Saving is explicit, revision-safe and lossless, and never publishes.
-init/install preview by default; writes require the observed destination digest.
-prepare-publication checks exact suggestion fields and live overlap without sending.
-After exact approval use the official service's browser/owner surface, preserving
-its current license attestation and human verification. Never turn missing authority,
-a CAPTCHA, a suggestion or a draft into a successful public publication.
+Ordinary mental model: `Experience -> Choice -> Minimality -> Feedback -> Integrity`.
+Simple work stays simple. Load a deep workflow only if it can change the decision
+or perform a requested specialized operation.
 
-observe captures a real explicitly requested command and subject hashes.
-check-observations checks a supplied digest and current subject bytes, not truth.
-Preserve native permissions, independent acceptance and honest stop conditions.
+Use `eog.py prompt --workflow <name> [--depth auto|off|lite|full|ultra]` when detailed
+context is useful. `auto` is default. Compatibility depth is task-scoped only;
+`off` never disables authority/integrity guards.
+
+Available deep operations: plan, search, review, audit, debt, impact, discover,
+find, compare, craft, adapt, loop-audit, repair, run, debrief, save, publish,
+handoff, doctor, and help. The current agent performs semantic work; deterministic
+helpers provide exact source/library operations and narrow integrity checks only.
+
+Never mistake structural validity, a hook, component test, or receipt for truth,
+permission, or consumer completion. Preserve current user intent, authority,
+canonical owners, unrelated work, and explicit Stop.

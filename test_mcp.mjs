@@ -14,7 +14,7 @@ test('official MCP stdio: discovery, context, validation, status and rejection',
  await client.connect(transport);t.after(async()=>{await client.close();});
  const tools=await client.listTools();assert.deepEqual(tools.tools.map(x=>x.name),['eog_instructions','eog_validate','eog_status','eog_find_loops','eog_saved_loops','eog_compare_loops']);
  const text=await client.callTool({name:'eog_instructions',arguments:{workflow:'review'}});
- assert.match(text.content[0].text,/Mandatory existing-wheel search/);
+ assert.match(text.content[0].text,/Existing solutions are first-class candidates/);
  const record=JSON.parse(readFileSync(path.join(directory,'example.json'),'utf8'));
  const valid=JSON.parse((await client.callTool({name:'eog_validate',arguments:{record}})).content[0].text);
  assert.equal(valid.structural_valid,true);assert.equal(valid.truth_verified,false);

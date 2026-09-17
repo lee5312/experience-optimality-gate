@@ -185,8 +185,33 @@ class AbsorptionTests(unittest.TestCase):
     def test_refresh_is_bounded_not_full_procedure_dump(self):
         compact=eog.refresh(self.root)
         self.assertLess(len(compact.encode()),len(eog.policy(self.root)['text'].encode())//4)
-        self.assertIn('Mandatory existing-wheel search',compact);self.assertIn('not a JSON form',compact)
+        self.assertIn('Existing solutions are first-class candidates',compact);self.assertIn('not a JSON form',compact)
         self.assertNotIn('## Preserved upstream procedure',compact)
+
+    def test_v2_intelligent_agent_contract_is_portable(self):
+        manifest=eog.read_json(eog.HERE/'capabilities.json')
+        self.assertEqual(manifest['absorption_status'],'capability_complete')
+        self.assertEqual(manifest['ordinary_mental_model'],['Experience','Choice','Minimality','Feedback','Integrity'])
+        self.assertNotIn('policy_change',{c['disposition'] for c in manifest['capabilities']})
+        for cid in ['uog.experience-contract','uog.no-ceremony','uog.decision-uncertainty',
+                    'ponytail.optional-modes','loopy.compare','loopy.repair']:
+            row=next(c for c in manifest['capabilities'] if c['id']==cid)
+            self.assertIn(row['capability_state'],manifest['capability_state_model'])
+            self.assertIn(row['evidence_state'],manifest['evidence_state_model'])
+
+    def test_v2_depth_compatibility_is_nonpersistent(self):
+        for depth in eog.DEPTHS:
+            text=eog.instructions(self.root,'plan',depth=depth)
+            self.assertIn('depth='+depth,text)
+        off=eog.instructions(self.root,'plan',depth='off')
+        self.assertIn('skip optional optimization',off)
+        self.assertIn('authority/integrity guards remain',off)
+        self.assertFalse(any(p.name.lower().endswith('mode') for p in self.root.iterdir()))
+
+    def test_v2_loopy_repair_canonical_and_legacy_alias(self):
+        self.assertIn('repair',eog.workflows())
+        self.assertNotIn('loop-repair',eog.workflows())
+        self.assertEqual(eog.instructions(self.root,'repair'),eog.instructions(self.root,'loop-repair'))
 
     def test_actual_command_observation_and_stale_subject(self):
         (self.root/'subject.txt').write_text('before')
@@ -213,7 +238,7 @@ class AbsorptionTests(unittest.TestCase):
 
     def test_native_launcher_runs_real_cli(self):
         r=subprocess.run(['node',str(eog.HERE/'bin/eog.mjs'),'--root',str(self.root),'refresh'],capture_output=True,text=True,timeout=20)
-        self.assertEqual(r.returncode,0,r.stderr);self.assertIn('Mandatory existing-wheel search',r.stdout)
+        self.assertEqual(r.returncode,0,r.stderr);self.assertIn('Existing solutions are first-class candidates',r.stdout)
 
 
     def test_prompt_cannot_inject_structured_loop_entry(self):

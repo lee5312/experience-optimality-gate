@@ -1,3 +1,3 @@
-# Experience Optimality Gate 1.1
+# EOG 2.0
 
-The normative, machine-consumed definition is the `## Experience Optimality Gate (EOG)` section in [`AGENTS.md`](AGENTS.md). This file exists as a human-facing entry point; integrations should consume `AGENTS.md` or generated native rules, not maintain a second policy copy.
+Canonical meaning lives in `AGENTS.md`. EOG assists intelligent-agent judgment; deep methods are optional and hard guards are narrow.

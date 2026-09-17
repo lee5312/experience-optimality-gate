@@ -1,8 +1,7 @@
 {
-  "version": "1.1.0",
-  "scope": "Coverage inventory for pinned UOG/Ponytail/Loopy responsibilities. Mapping is not behavioral parity or replacement readiness; external services may remain reused while client parity is verified.",
-  "absorption_status": "incomplete",
-  "status_model": ["mapped", "implemented", "parity_verified", "replacement_ready"],
+  "version": "2.0.0",
+  "scope": "Capability closure inventory for UOG, pinned Ponytail, and pinned Loopy. Capability existence is separate from verification evidence; external services may remain reused while their client experience is absorbed.",
+  "absorption_status": "capability_complete",
   "upstream": {
     "uog": "AGENTS.md#experience-optimality-gate-eog",
     "ponytail": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/",
@@ -16,7 +15,9 @@
       "implementation": "AGENTS.md section 1",
       "workflow": "plan",
       "acceptance": "Human and nonhuman root cases preserve actual desired experience",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "uog.derivation",
@@ -25,7 +26,9 @@
       "implementation": "AGENTS.md section 2",
       "workflow": "plan",
       "acceptance": "Existing structural tests reject cycles/dangling refs/incorrect alternative claims",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "uog.wheel-search",
@@ -34,7 +37,9 @@
       "implementation": "AGENTS.md section 3",
       "workflow": "search",
       "acceptance": "New build without inspected sources is rejected; no unavailable-as-absence claim",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "uog.gap",
@@ -43,7 +48,9 @@
       "implementation": "AGENTS.md section 4",
       "workflow": "plan",
       "acceptance": "Novel glue/adapter also requires independent existing-option gap comparison",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "uog.selection",
@@ -52,7 +59,9 @@
       "implementation": "AGENTS.md section 5",
       "workflow": "plan",
       "acceptance": "Tradeoffs cannot silently lower required experience or hard constraints",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "uog.verification",
@@ -61,7 +70,9 @@
       "implementation": "AGENTS.md section 7",
       "workflow": "plan",
       "acceptance": "Current failed/stale observations block completion",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.core",
@@ -70,7 +81,9 @@
       "implementation": "workflows.json",
       "workflow": "plan",
       "acceptance": "Existing-wheel solution chosen; safety and user requirements retained",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.causal",
@@ -79,7 +92,9 @@
       "implementation": "workflows.json",
       "workflow": "review",
       "acceptance": "Trace sibling callers before symptom-only patch",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.review",
@@ -88,7 +103,9 @@
       "implementation": "workflows.json",
       "workflow": "review",
       "acceptance": "Compare real diff against existing/std native alternatives and correctness",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.audit",
@@ -97,7 +114,9 @@
       "implementation": "workflows.json",
       "workflow": "audit",
       "acceptance": "Rank evidence-backed ownership burden, no arbitrary deletion",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.debt",
@@ -106,7 +125,9 @@
       "implementation": "workflows.json; eog.py",
       "workflow": "debt",
       "acceptance": "Real tracked marker scan preserves legacy text and marks missing trigger",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.impact",
@@ -115,7 +136,9 @@
       "implementation": "workflows.json; eog.py",
       "workflow": "impact",
       "acceptance": "Real Git delta; no counterfactual savings; external numbers attributed",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.help",
@@ -124,7 +147,9 @@
       "implementation": "workflows.json",
       "workflow": "help",
       "acceptance": "Single EOG dispatcher exposes all operations",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.lifecycle",
@@ -133,7 +158,9 @@
       "implementation": "eog.py hook/install; AGENTS.md",
       "workflow": "doctor",
       "acceptance": "Native supported output and current core digest; malformed source not accepted",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.delegation",
@@ -142,7 +169,9 @@
       "implementation": "eog.py handoff/verify-handoff; native SubagentStart",
       "workflow": "handoff",
       "acceptance": "Different task/revision/policy or changed packet rejected",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.status",
@@ -151,7 +180,9 @@
       "implementation": "eog.py doctor; adapters/pi.mjs",
       "workflow": "doctor",
       "acceptance": "Reports digest/configuration, not false compliance/success",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.installation",
@@ -160,7 +191,9 @@
       "implementation": "eog.py install/uninstall",
       "workflow": "doctor",
       "acceptance": "Preview/CAS/idempotency/foreign settings preserved",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.portability",
@@ -169,7 +202,9 @@
       "implementation": "eog.py RULE_PATHS; integrations.json; native AGENTS",
       "workflow": "doctor",
       "acceptance": "Each claimed host tested independently; unsupported interfaces not fabricated",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.opencode",
@@ -178,7 +213,9 @@
       "implementation": "adapters/opencode.mjs",
       "workflow": "doctor",
       "acceptance": "Native transform callback, no duplicated block or foreign command overwrite",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.pi",
@@ -187,7 +224,9 @@
       "implementation": "adapters/pi.mjs",
       "workflow": "doctor",
       "acceptance": "before_agent_start fresh context; followUp for active agent",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.hermes",
@@ -196,7 +235,9 @@
       "implementation": "adapters/hermes.py",
       "workflow": "doctor",
       "acceptance": "Existing slash permission preserved; actual registration callback test",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.mcp",
@@ -205,7 +246,9 @@
       "implementation": "mcp_server.mjs using official SDK1.30.0",
       "workflow": "doctor",
       "acceptance": "Actual official client/stdIO request-response; not every-turn claim",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.regression",
@@ -214,16 +257,20 @@
       "implementation": "test_eog.py; test_runtime.py; test_adapters.mjs; test_mcp.mjs; behavior_cases.json",
       "workflow": "doctor",
       "acceptance": "Distinguish unit/contract/native/model observations; no false benchmark",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "ponytail.optional-modes",
       "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/hooks/ponytail-config.js",
       "responsibility": "Optional off/lite/full/ultra and output-style modes",
-      "implementation": "AGENTS.md sections 1/5/10; workflow selection",
+      "implementation": "AGENTS.md Depth compatibility; eog.py prompt --depth auto|off|lite|full|ultra",
       "workflow": "help",
-      "acceptance": "Explicitly replaced with mandatory proportional depth; user Stop preserved; no weakening via mode file",
-      "disposition": "policy_change"
+      "acceptance": "Task-scoped auto/off/lite/full/ultra semantics are expressible without persistent mode state; off never disables integrity/authority guards",
+      "disposition": "compatibility_alias",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.discover",
@@ -232,7 +279,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "discover",
       "acceptance": "Two distinct observed recurrences or clearly inferred opportunity",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.find",
@@ -241,7 +290,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "find",
       "acceptance": "Exact live catalog/source digest; explicit unavailable if fetch fails",
-      "disposition": "external_reuse"
+      "disposition": "external_service_reuse",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.craft",
@@ -250,7 +301,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "craft",
       "acceptance": "Ask only missing material facts; no fake technology/budget",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.adapt",
@@ -259,7 +312,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "adapt",
       "acceptance": "Preserve source/intent and expose only justified changed conditions",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.loop-audit",
@@ -268,7 +323,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "loop-audit",
       "acceptance": "Cycle/failure/stagnation/authority/overfit review",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.run",
@@ -277,7 +334,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "run",
       "acceptance": "Same current agent; check-loop and check-receipt; no hidden scheduler",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.debrief",
@@ -286,7 +345,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "debrief",
       "acceptance": "Observed receipt, not speculative prompt rewrite",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.save",
@@ -295,7 +356,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "save",
       "acceptance": "CAS append preserves legacy LOOPS.md and exact definition",
-      "disposition": "mapped"
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.publish",
@@ -304,7 +367,9 @@
       "implementation": "workflows.json; eog.py; loop/receipt schemas",
       "workflow": "publish",
       "acceptance": "Current provider contract plus approval and readback; no invented endpoint",
-      "disposition": "external_reuse"
+      "disposition": "external_service_reuse",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "loopy.library-service",
@@ -313,7 +378,9 @@
       "implementation": "Live external provider; no copied worker/database",
       "workflow": "find",
       "acceptance": "Retain access to the external service independently of local Loopy skill; never claim service is locally absorbed",
-      "disposition": "external_reuse"
+      "disposition": "external_service_reuse",
+      "capability_state": "compatible",
+      "evidence_state": "unverified"
     },
     {
       "id": "eog.typed-admission",
@@ -322,7 +389,9 @@
       "implementation": "eog.py gate/pretool",
       "workflow": "plan",
       "acceptance": "Mismatched record denied on configured native boundary; valid result never grants ALLOW",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
     },
     {
       "id": "eog.retirement",
@@ -331,7 +400,116 @@
       "implementation": "eog.py replacement-check; capabilities.json",
       "workflow": "doctor",
       "acceptance": "Missing host/capability/rollback evidence cannot authorize removal",
-      "disposition": "mapped"
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.experience-contract",
+      "source": "historical UOG in Paralloff AGENTS.md",
+      "responsibility": "Explicit entry/success/interaction/wait/pay/continuity/failure/recovery contract",
+      "implementation": "AGENTS.md Judgment Core / Optimality",
+      "workflow": "plan",
+      "acceptance": "Material choices retain decision-relevant consumer interaction, waiting, cost, continuity, failure and recovery without compulsory form filling",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.candidate-closure",
+      "source": "historical UOG in Paralloff AGENTS.md",
+      "responsibility": "Feasible classes include current/native/installed/product/OSS/no-change/waiting",
+      "implementation": "AGENTS.md Existing solutions / Optimality",
+      "workflow": "search",
+      "acceptance": "Decision-relevant candidate classes are considered without ceremonial category surveys",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.total-burden",
+      "source": "historical UOG in Paralloff AGENTS.md",
+      "responsibility": "Time/cash/tokens/engineering/maintenance/failure/migration/lock-in/cognitive burden",
+      "implementation": "AGENTS.md Compare without fake precision",
+      "workflow": "plan",
+      "acceptance": "No fake scoring; dominated candidates removed and real user priorities resolve remaining tradeoffs",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.exitability",
+      "source": "historical UOG in Paralloff AGENTS.md",
+      "responsibility": "Durable truth ownership and replaceability",
+      "implementation": "AGENTS.md Experience / Hard Guards",
+      "workflow": "plan",
+      "acceptance": "Replaceable tools do not become sole unrecoverable owners",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.no-ceremony",
+      "source": "historical UOG in Paralloff AGENTS.md",
+      "responsibility": "Concise judgment for deterministic low-risk work",
+      "implementation": "AGENTS.md Optional Deep Methods / Representation Policy",
+      "workflow": "plan",
+      "acceptance": "Ordinary low-risk work requires no DAG, JSON record, candidate matrix or receipt",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "uog.decision-uncertainty",
+      "source": "EOG 2.0 generalization of UOG decisive unknowns",
+      "responsibility": "Investigate only uncertainty capable of changing the decision",
+      "implementation": "AGENTS.md Investigate decision-relevant uncertainty",
+      "workflow": "plan",
+      "acceptance": "Unknowns that cannot change feasibility/frontier/residual novelty/commitment do not trigger research",
+      "disposition": "generalized",
+      "capability_state": "implemented",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "loopy.compare",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "responsibility": "Compare exact loop definitions without executing them",
+      "implementation": "workflows.json compare; library_support.py",
+      "workflow": "compare",
+      "acceptance": "Compare outcome, inputs, verification, authority, feedback and stops; unknowns remain unknown",
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
+    },
+    {
+      "id": "loopy.repair",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/audit.md",
+      "responsibility": "Repair material loop defects without changing authority or executing",
+      "implementation": "workflows.json repair; pinned Loop Doctor reference",
+      "workflow": "repair",
+      "acceptance": "Material repair preserves intended outcome/authority and dry-traces failure/approval/no-progress",
+      "disposition": "absorbed",
+      "capability_state": "compatible",
+      "evidence_state": "contract_verified"
     }
-  ]
+  ],
+  "capability_state_model": [
+    "absent",
+    "mapped",
+    "implemented",
+    "compatible"
+  ],
+  "evidence_state_model": [
+    "unverified",
+    "contract_verified",
+    "native_verified"
+  ],
+  "ordinary_mental_model": [
+    "Experience",
+    "Choice",
+    "Minimality",
+    "Feedback",
+    "Integrity"
+  ],
+  "superset_contract": "Every useful upstream capability resolves to absorbed, generalized, compatibility_alias, or external_service_reuse; no useful upstream capability is removed without a more general equivalent."
 }

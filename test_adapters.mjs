@@ -7,7 +7,7 @@ import openCode from './adapters/opencode.mjs';
 import piExtension from './adapters/pi.mjs';
 
 test('shared context reads canonical source without legacy dependencies',()=>{
- const text=context('review');assert.match(text,/Mandatory existing-wheel search/);assert.match(text,/Requested EOG operation/);
+ const text=context('review');assert.match(text,/Existing solutions are first-class candidates/);assert.match(text,/Requested EOG operation/);
 });
 test('native context stays one block while preserving foreign text',()=>{
  const once=appendContext('Foreign instructions.');const twice=appendContext(once);

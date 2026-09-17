@@ -20,7 +20,7 @@ class RuntimeTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name)
-        (self.root/'AGENTS.md').write_text(CORE)
+        (self.root/'AGENTS.md').write_text(CORE,encoding='utf-8')
         self.record=eog.read_json(HERE/'example.json')
         self.owner=self.record['scope']['work_owner'];self.rev=self.record['scope']['subject_revision']
         self.loop=eog.read_json(HERE/'loop.example.json')
@@ -40,26 +40,26 @@ class RuntimeTests(unittest.TestCase):
         manifest=(HERE/'plugin.yaml').read_text()
         self.assertIn('name: eog',manifest);self.assertIn('pre_llm_call',manifest)
     def test_policy_exact_section(self):
-        (self.root/'AGENTS.md').write_text('# unrelated\n'+CORE+'\n## Other\nunchanged\n')
+        (self.root/'AGENTS.md').write_text('# unrelated\n'+CORE+'\n## Other\nunchanged\n',encoding='utf-8')
         p=eog.policy(self.root)
         self.assertTrue(p['text'].startswith(eog.HEADING));self.assertNotIn('## Other',p['text'])
     def test_policy_fenced_example_is_not_owner(self):
-        (self.root/'AGENTS.md').write_text('```markdown\n'+eog.HEADING+'\n```\n'+CORE)
+        (self.root/'AGENTS.md').write_text('```markdown\n'+eog.HEADING+'\n```\n'+CORE,encoding='utf-8')
         self.assertEqual(eog.policy(self.root)['text'],CORE.rstrip()+'\n')
     def test_policy_duplicate_rejected(self):
-        (self.root/'AGENTS.md').write_text(CORE+'\n'+CORE)
+        (self.root/'AGENTS.md').write_text(CORE+'\n'+CORE,encoding='utf-8')
         with self.assertRaises(ValueError):eog.policy(self.root)
     def test_policy_missing_rejected(self):
         (self.root/'AGENTS.md').write_text('# Not a gate\n')
         with self.assertRaises(ValueError):eog.policy(self.root)
     def test_policy_change_changes_digest(self):
-        old=eog.policy(self.root)['policy_sha256'];(self.root/'AGENTS.md').write_text(CORE+'\nChanged definition.\n')
+        old=eog.policy(self.root)['policy_sha256'];(self.root/'AGENTS.md').write_text(CORE+'\nChanged definition.\n',encoding='utf-8')
         self.assertNotEqual(old,eog.policy(self.root)['policy_sha256'])
     def test_all_workflows_are_executable_context(self):
         for workflow in eog.workflows():
             with self.subTest(workflow=workflow):
                 text=eog.instructions(self.root,workflow)
-                self.assertIn('Mandatory existing-wheel search',text)
+                self.assertIn('Existing solutions are first-class candidates',text)
                 self.assertIn('Requested EOG operation:',text)
     def test_invalid_workflow_rejected(self):
         with self.assertRaises(ValueError):eog.instructions(self.root,'ponytail-unknown')
@@ -115,7 +115,7 @@ class RuntimeTests(unittest.TestCase):
             r=eog.pretool(self.root,self.record,h,'design',self.rev,self.owner,'codex',expected_policy=eog.policy(self.root)['policy_sha256'])
             self.assertIn('deny',eog.dumps(r))
     def test_no_progress_rule_does_not_stop_informative_feedback(self):
-        self.assertIn('Stop when progress has ceased and no new evidence', ' '.join(CORE.split()))
+        self.assertIn('stop when more information cannot reasonably change the next useful decision', ' '.join(CORE.split()).lower())
     def test_pretool_does_not_depend_on_workflow_prompt_file(self):
         import contextlib, io
         argv=['eog','--root',str(self.root),'pretool',str(self.root/'missing.json'),
@@ -137,7 +137,7 @@ class RuntimeTests(unittest.TestCase):
     def test_handoff_wrong_recipient_scope(self):
         with self.assertRaises(ValueError):eog.verify_handoff(self.root,self.packet(),'different task',self.rev)
     def test_handoff_stale_policy(self):
-        p=self.packet();(self.root/'AGENTS.md').write_text(CORE+'\nChanged\n')
+        p=self.packet();(self.root/'AGENTS.md').write_text(CORE+'\nChanged\n',encoding='utf-8')
         with self.assertRaises(ValueError):eog.verify_handoff(self.root,p,self.owner,self.rev)
     def test_handoff_requires_stops(self):
         with self.assertRaises(ValueError):eog.handoff(self.root,self.record,self.owner,self.rev,'fixture',[])
@@ -179,6 +179,7 @@ class RuntimeTests(unittest.TestCase):
         self.assertEqual(before,(self.root/'LOOPS.md').read_bytes())
     def test_save_confined_and_symlink(self):
         with self.assertRaises(ValueError):eog.save_loop(self.root,'../escape.md',self.loop,'absent')
+        if os.name=='nt': self.skipTest('unprivileged Windows symlink creation is unavailable on this runner')
         (self.root/'link').symlink_to(self.root/'elsewhere')
         with self.assertRaises(ValueError):eog.save_loop(self.root,'link',self.loop,'absent')
     def test_cooperative_lock_is_fail_closed_and_cleaned(self):
@@ -187,6 +188,7 @@ class RuntimeTests(unittest.TestCase):
             with self.assertRaises(FileExistsError):eog.save_loop(self.root,'LOOPS.md',self.loop,'absent')
         self.assertFalse((self.root/'.LOOPS.md.eog-write-lock').exists())
     def test_native_install_merge_idempotent_remove(self):
+        if os.name=='nt': self.skipTest('native Windows hook install intentionally unclaimed; project-rule delivery is supported')
         for host,rel in eog.CONFIG_PATHS.items():
             with self.subTest(host=host):
                 p=self.root/rel;p.parent.mkdir(parents=True,exist_ok=True)
@@ -198,6 +200,7 @@ class RuntimeTests(unittest.TestCase):
                 eog.uninstall(self.root,host,again['sha256']);rest=eog.read_json(p)
                 self.assertEqual(rest['x'],1);self.assertEqual(rest['hooks']['ForeignEvent'],foreign['hooks']['ForeignEvent'])
     def test_install_requires_expected_and_preserves_stale(self):
+        if os.name=='nt': self.skipTest('native Windows hook install intentionally unclaimed; project-rule delivery is supported')
         with self.assertRaises(ValueError):eog.install(self.root,'cursor',None,True)
         r=eog.install(self.root,'cursor','absent',True);p=self.root/eog.CONFIG_PATHS['cursor'];p.write_text('{"user":true}')
         with self.assertRaises(ValueError):eog.install(self.root,'cursor',r['sha256'],True)
@@ -208,7 +211,7 @@ class RuntimeTests(unittest.TestCase):
         self.assertTrue(eog.doctor(self.root,'claude-rule')['adapter']['configured_and_current'])
         eog.uninstall(self.root,'claude-rule',r['sha256']);self.assertIn(before,p.read_text())
     def test_generated_rule_foreign_edit_refuses_uninstall(self):
-        eog.install(self.root,'claude-rule','absent',True);p=self.root/'CLAUDE.md';p.write_text(p.read_text().replace('EOG 1.1','EOG custom'))
+        eog.install(self.root,'claude-rule','absent',True);p=self.root/'CLAUDE.md';p.write_text(p.read_text().replace('EOG 2.0','EOG custom'))
         with self.assertRaises(ValueError):eog.uninstall(self.root,'claude-rule',eog.file_state(p))
     def test_cursor_rule_cannot_silently_disable(self):
         p=self.root/'.cursor/rules/eog.mdc';p.parent.mkdir(parents=True);p.write_text('---\nalwaysApply: false\n---\nuser\n')
@@ -250,11 +253,33 @@ class RuntimeTests(unittest.TestCase):
         allow=types.SimpleNamespace(_check_slash_access=lambda *_:None)
         self.assertIsNone(m.rewrite_gateway(event,deny));self.assertIsNone(m.rewrite_gateway(event,None))
         self.assertEqual(m.rewrite_gateway(event,allow)['action'],'rewrite')
-        self.assertIn('Mandatory existing-wheel search',m.before_llm()['context'])
+        self.assertIn('Existing solutions are first-class candidates',m.before_llm()['context'])
     def test_hermes_queues_on_existing_host_only(self):
         spec=importlib.util.spec_from_file_location('eog_hermes_registration',HERE/'adapters/hermes.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.ROOT=self.root
         registered={}
         ctx=types.SimpleNamespace(register_skill=lambda name,path:registered.update(skill=(name,path)),register_hook=lambda name,fn:registered.update({name:fn}),register_command=lambda name,fn,**kw:registered.update(command=fn),inject_message=lambda _:True)
         m.register(ctx);self.assertEqual(registered['skill'][0],'eog');self.assertIn('Queued',registered['command']('review'))
+
+    def test_v2_depth_compatibility_is_task_scoped(self):
+        for depth in eog.DEPTHS:
+            text=eog.instructions(self.root,'plan',depth=depth)
+            self.assertIn('depth='+depth,text)
+        self.assertIn('skip optional optimization',eog.instructions(self.root,'plan',depth='off'))
+        self.assertIn('authority/integrity guards remain',eog.instructions(self.root,'plan',depth='off'))
+
+    def test_v2_manifest_separates_capability_and_evidence(self):
+        m=eog.read_json(HERE/'capabilities.json')
+        self.assertEqual(m['absorption_status'],'capability_complete')
+        self.assertEqual(m['ordinary_mental_model'],['Experience','Choice','Minimality','Feedback','Integrity'])
+        self.assertNotIn('policy_change',{x['disposition'] for x in m['capabilities']})
+        for cid in ['ponytail.optional-modes','loopy.compare','loopy.repair','uog.no-ceremony','uog.decision-uncertainty']:
+            row=next(x for x in m['capabilities'] if x['id']==cid)
+            self.assertIn(row['capability_state'],m['capability_state_model'])
+            self.assertIn(row['evidence_state'],m['evidence_state_model'])
+
+    def test_v2_repair_is_canonical_and_legacy_alias_preserved(self):
+        self.assertIn('repair',eog.workflows())
+        self.assertNotIn('loop-repair',eog.workflows())
+        self.assertIn('Repair material loop defects',eog.instructions(self.root,'loop-repair'))
 
 if __name__=='__main__':unittest.main()
