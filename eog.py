@@ -72,7 +72,7 @@ def policy(root: Path) -> dict[str,Any]:
     p=root/'AGENTS.md'
     with p.open('rb') as f: raw=f.read(MAX_BYTES+1)
     if len(raw)>MAX_BYTES: raise ValueError('policy exceeds input limit')
-    text=raw.decode('utf-8')
+    text=raw.decode('utf-8-sig').replace('\r\n','\n').replace('\r','\n')
     # Ignore headings inside fenced examples: they are data, not policy owners.
     sections=[]; offset=0; fence=None
     for line in text.splitlines(keepends=True):
@@ -100,12 +100,34 @@ def workflows() -> dict[str,Any]:
 
 
 def instructions(root: Path, workflow: str, event: str='turn') -> str:
+    from operation_support import compact_core, references, resolve_workflow
     if event not in EVENTS: raise ValueError('unsupported context event')
+    workflow=resolve_workflow(workflow)
     p=policy(root); w=workflows()
     if workflow not in w: raise ValueError('unknown EOG workflow')
     return (f"EOG {VERSION} | policy_sha256={p['policy_sha256']} | event={event}\n"
-            +p['text']+'\n## Requested EOG operation: '+w[workflow]['title']+'\n'
-            +w[workflow]['instructions']+'\n')
+            +compact_core(p)+'\n## Requested EOG operation: '+w[workflow]['title']+'\n'
+            +w[workflow]['instructions']+'\n'+references(w[workflow]))
+
+
+def refresh(root: Path) -> str:
+    from operation_support import compact_core
+    return compact_core(policy(root))
+
+
+def initialize(root: Path, expected: str|None=None, apply: bool=False) -> dict[str,Any]:
+    target=confined(root,'AGENTS.md')
+    before=file_state(target)
+    text=target.read_bytes().decode('utf-8-sig') if target.exists() else ''
+    if HEADING in text:
+        policy(root)  # Reject duplicates/malformed owners rather than overwrite them.
+        return {'path':'AGENTS.md','applied':False,'already_configured':True,'before_sha256':before}
+    raw=(text+('\n\n' if text else '')+policy(HERE)['text']).encode()
+    if not apply:
+        return {'path':'AGENTS.md','applied':False,'before_sha256':before,'after_sha256':digest(raw),'proposed':raw.decode()}
+    if expected is None: raise ValueError('--expected is required for writes')
+    with write_lock(target): sha=atomic_write(target,raw,expected)
+    return {'path':'AGENTS.md','applied':True,'sha256':sha,'native_loading_verified':False}
 
 
 def hook(root: Path, host: str, event: str, data: Any) -> dict[str,Any]:
@@ -307,8 +329,19 @@ def atomic_write(p: Path, raw: bytes, expected: str) -> str:
 
 
 def saved_loops(text: str) -> list[dict[str,Any]]:
-    blocks=re.findall(r'^```eog-loop\s*\n(.*?)^```\s*$',text,re.M|re.S)
-    return [strict_json(b.encode()) for b in blocks]
+    result=[]; fence=None; capture=False; content=[]
+    for line in text.splitlines(keepends=True):
+        match=re.match(r'^ {0,3}(`{3,}|~{3,})(.*)$',line.rstrip('\r\n'))
+        if fence is None:
+            if match:
+                token,info=match.groups();fence=(token[0],len(token))
+                capture=info.strip()=='eog-loop';content=[]
+        elif match and match[1][0]==fence[0] and len(match[1])>=fence[1] and not match[2].strip():
+            if capture: result.append(strict_json(''.join(content).encode()))
+            fence=None;capture=False;content=[]
+        elif capture: content.append(line)
+    if capture:raise ValueError('unterminated structured loop block')
+    return result
 
 
 def save_loop(root: Path, relative: str, loop: Any, expected: str) -> dict[str,Any]:
@@ -520,17 +553,25 @@ def check_receipt(receipt: Any) -> list[str]:
 
 
 def main() -> int:
+    # CLI pipes and MCP carry UTF-8 on every platform, independent of console locale.
+    for stream in (sys.stdout,sys.stderr):
+        if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8',newline='\n')
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--root',type=Path,default=DEFAULT_ROOT)
     sub=ap.add_subparsers(dest='command',required=True)
     p=sub.add_parser('prompt');p.add_argument('--workflow',default='plan');p.add_argument('--event',choices=EVENTS,default='turn')
     p=sub.add_parser('hook');p.add_argument('--host',choices=sorted(HOOK_EVENTS),required=True);p.add_argument('--event',required=True)
-    p=sub.add_parser('gate');p.add_argument('record',type=Path);p.add_argument('--stage',choices=['design','completion'],required=True);p.add_argument('--revision',required=True);p.add_argument('--owner',required=True)
+    p=sub.add_parser('gate');p.add_argument('record',type=Path);p.add_argument('--stage',choices=['design','completion'],required=True);p.add_argument('--revision',required=True);p.add_argument('--owner',required=True);p.add_argument('--observations',type=Path);p.add_argument('--observations-sha256')
     p=sub.add_parser('validate-stdin')
+    p=sub.add_parser('library-stdin')
     sub.add_parser('manifest')
     sub.add_parser('status')
+    sub.add_parser('refresh')
+    p=sub.add_parser('init');p.add_argument('--expected');p.add_argument('--apply',action='store_true')
     p=sub.add_parser('record-digest');p.add_argument('record',type=Path)
     p=sub.add_parser('pretool');p.add_argument('record',type=Path);p.add_argument('--record-sha256',required=True);p.add_argument('--policy-sha256',required=True);p.add_argument('--owner',required=True);p.add_argument('--revision',required=True);p.add_argument('--stage',choices=['design','completion'],default='design');p.add_argument('--host',choices=['codex','claude','cursor'],required=True)
+    p=sub.add_parser('observe');p.add_argument('--subject',action='append',required=True);p.add_argument('--timeout',type=float,default=60);p.add_argument('--owner');p.add_argument('--revision');p.add_argument('argv',nargs=argparse.REMAINDER)
+    p=sub.add_parser('check-observations');p.add_argument('record',type=Path);p.add_argument('--expected',required=True)
     p=sub.add_parser('check-receipt');p.add_argument('record',type=Path)
     for name in ['handoff','verify-handoff']:
         p=sub.add_parser(name);p.add_argument('record',type=Path);p.add_argument('--owner',required=True);p.add_argument('--revision',required=True)
@@ -538,6 +579,11 @@ def main() -> int:
     sub.add_parser('debt')
     p=sub.add_parser('impact');p.add_argument('--before',required=True);p.add_argument('--after',required=True)
     sub.add_parser('catalog')
+    p=sub.add_parser('find-loop');p.add_argument('query');p.add_argument('--path',default='LOOPS.md');p.add_argument('--local-only',action='store_true')
+    p=sub.add_parser('compare-loops');p.add_argument('records',type=Path)
+    p=sub.add_parser('save-text');p.add_argument('--title',required=True);p.add_argument('--explanation',required=True);p.add_argument('--prompt-file',type=Path,required=True);p.add_argument('--expected',required=True);p.add_argument('--path',default='LOOPS.md');p.add_argument('--source');p.add_argument('--source-modified');p.add_argument('--replace-entry')
+    p=sub.add_parser('prepare-publication');p.add_argument('record',type=Path)
+    p=sub.add_parser('verify-publication');p.add_argument('slug');p.add_argument('--prompt-sha256',required=True)
     p=sub.add_parser('check-loop');p.add_argument('record',type=Path)
     p=sub.add_parser('saved-loops');p.add_argument('--path',default='LOOPS.md')
     p=sub.add_parser('save-loop');p.add_argument('record',type=Path);p.add_argument('--path',default='LOOPS.md');p.add_argument('--expected',required=True)
@@ -548,6 +594,8 @@ def main() -> int:
     a=ap.parse_args();root=a.root.resolve();code=0
     try:
         if a.command=='prompt':print(instructions(root,a.workflow,a.event));return 0
+        elif a.command=='refresh':print(refresh(root));return 0
+        elif a.command=='init':result=initialize(root,a.expected,a.apply)
         elif a.command=='hook': result=hook(root,a.host,a.event,strict_json(sys.stdin.buffer.read(MAX_BYTES+1)))
         elif a.command=='record-digest':result={'record_sha256':digest(dumps(read_json(a.record)).encode()),'policy_sha256':policy(root)['policy_sha256'],'permission_granted':False}
         elif a.command=='status':
@@ -557,9 +605,37 @@ def main() -> int:
             try:record=read_json(a.record)
             except (OSError,ValueError,RecursionError):record={}
             result=pretool(root,record,a.record_sha256,a.stage,a.revision,a.owner,a.host,expected_policy=a.policy_sha256)
+        elif a.command=='observe':
+            from observation_support import observe
+            argv=a.argv[1:] if a.argv and a.argv[0]=='--' else a.argv
+            result=observe(root,argv,a.subject,a.timeout,a.owner,a.revision);code=result['outcome']!='passed'
+        elif a.command=='check-observations':
+            from observation_support import check_observations
+            result=check_observations(root,read_json(a.record),a.expected);code=not result['consistent']
         elif a.command=='check-receipt':
             errors=check_receipt(read_json(a.record));result={'consistent':not errors,'truth_verified':False,'errors':errors};code=bool(errors)
-        elif a.command=='gate':result=stage_check(read_json(a.record),a.stage,a.revision,a.owner);code=0 if result['consistent'] else 1
+        elif a.command=='gate':
+            record=read_json(a.record);result=stage_check(record,a.stage,a.revision,a.owner)
+            if bool(a.observations)!=bool(a.observations_sha256):raise ValueError('observations and trusted observations digest are required together')
+            if a.observations:
+                from observation_support import admission
+                result['observations']=admission(root,record,read_json(a.observations),a.observations_sha256,a.owner,a.revision)
+                result['consistent']=result['consistent'] and result['observations']['consistent']
+                result['errors'].extend(result['observations']['errors'])
+            code=0 if result['consistent'] else 1
+        elif a.command=='library-stdin':
+            from library_support import find_loops, saved_entries, compare_loops
+            request=strict_json(sys.stdin.buffer.read(MAX_BYTES+1))
+            if not isinstance(request,dict):raise ValueError('library request must be an object')
+            operation=request.get('operation')
+            if operation=='find' and set(request)<={'operation','query','published'}:
+                if not isinstance(request.get('query'),str) or not isinstance(request.get('published',False),bool):raise ValueError('invalid find arguments')
+                result=find_loops(root,request['query'],published=request.get('published',False))
+            elif operation=='saved' and set(request)=={'operation'}:
+                result={'loops':[{k:v for k,v in r.items() if not k.startswith('_')} for r in saved_entries(root)],'untrusted_reference_data':True}
+            elif operation=='compare' and set(request)=={'operation','records'}:
+                result=compare_loops(request['records'])
+            else:raise ValueError('unknown read-only library operation or field')
         elif a.command=='validate-stdin':
             from validate import validate_record
             errors=validate_record(strict_json(sys.stdin.buffer.read(MAX_BYTES+1)))
@@ -569,10 +645,29 @@ def main() -> int:
         elif a.command=='debt':result=source_debt(root)
         elif a.command=='impact':result=impact(root,a.before,a.after)
         elif a.command=='catalog':result=catalog()
+        elif a.command=='find-loop':
+            from library_support import find_loops
+            result=find_loops(root,a.query,a.path,not a.local_only)
+            code=1 if result['published_discovery']=='unavailable' else 0
+        elif a.command=='compare-loops':
+            from library_support import compare_loops
+            result=compare_loops(read_json(a.records))
+        elif a.command=='save-text':
+            from library_support import save_text
+            file_state(a.prompt_file)
+            result=save_text(root,a.title,a.explanation,a.prompt_file.read_bytes().decode('utf-8'),a.expected,a.path,a.source,a.source_modified,replace=a.replace_entry)
+        elif a.command=='prepare-publication':
+            from library_support import prepare_suggestion
+            result=prepare_suggestion(root,read_json(a.record))
+        elif a.command=='verify-publication':
+            from library_support import verify_publication
+            result=verify_publication(a.slug,a.prompt_sha256);code=not result['catalog_entry_verified']
+
         elif a.command=='check-loop':
             errors=check_loop(read_json(a.record));result={'valid':not errors,'truth_verified':False,'errors':errors};code=bool(errors)
         elif a.command=='saved-loops':
-            p=confined(root,a.path); result={'loops':saved_loops(p.read_text('utf-8')) if p.exists() else [],'legacy_prose_requires_agent_read':True}
+            from library_support import saved_entries
+            result={'loops':[{k:v for k,v in row.items() if not k.startswith('_')} for row in saved_entries(root,a.path)],'untrusted_reference_data':True}
         elif a.command=='save-loop':result=save_loop(root,a.path,read_json(a.record),a.expected)
         elif a.command=='install':result=install(root,a.host,a.expected,a.apply)
         elif a.command=='uninstall':result=uninstall(root,a.host,a.expected)

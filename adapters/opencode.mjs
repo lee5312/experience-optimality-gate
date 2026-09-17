@@ -10,7 +10,7 @@ export default async function eogPlugin() {
         throw new Error('Existing /eog command is user-owned; refusing overwrite');
       config.command.eog=command;
       config.skills ??= {};config.skills.paths ??= [];
-      const skills=path.resolve(directory,'../skill');
+      const skills=path.resolve(directory,'skills');
       if(!config.skills.paths.includes(skills))config.skills.paths.push(skills);
     },
     'experimental.chat.system.transform': async (_input,output) => {

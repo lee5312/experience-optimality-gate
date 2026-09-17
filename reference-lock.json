@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "files": {
+    "ponytail.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail/SKILL.md",
+      "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "ponytail-review.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail-review/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-review/SKILL.md",
+      "sha256": "40df33b58fc6ef889b93585733feb9566b76e9586efa7f376785c1e995197ac0",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "ponytail-audit.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail-audit/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-audit/SKILL.md",
+      "sha256": "5560b8e383dbe2ddfddc873a1e2bf2e586e23e0cd7d995537482b2315331f6d1",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "ponytail-debt.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail-debt/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-debt/SKILL.md",
+      "sha256": "c84fba75f0ca12bfe83f9a78ea02fd125c5dd3f1fbb18124105a489937f284e6",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "ponytail-gain.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail-gain/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-gain/SKILL.md",
+      "sha256": "24e01d1c9715cb136ba1c4f1e52a95940c0193558b876828e537736480d6408b",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "ponytail-help.md": {
+      "project": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "upstream_path": "skills/ponytail-help/SKILL.md",
+      "source": "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/skills/ponytail-help/SKILL.md",
+      "sha256": "2264d1615117b02b0fd5a69ec84cd2757006471a78e4d6c22eed6d581c1d37a4",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/SKILL.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/SKILL.md",
+      "sha256": "fb366c51324a2123f825f59175624bfde57be0274cf98824d7fdfd04755390d5",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy-discover.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/references/discover.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/discover.md",
+      "sha256": "f3c46e4cc66740e99eda7df026e1be8ff582b33c8874eff4aeff2ebe291a453a",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy-audit.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/references/audit.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/audit.md",
+      "sha256": "c58d26f53df9a762c40f7d0286f7f0fa31812a2ce85cb8c368adc0bb0fb2906f",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy-run.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/references/run.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/run.md",
+      "sha256": "2f27835d5e4d06b67e334813665aeb6ede5daa8c03c6ffba3765751be8b533c4",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy-debrief.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/references/debrief.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/debrief.md",
+      "sha256": "909669215acd8aa68c582fbe50aea7d3bdc0195878f12560ce35bcdf029c88da",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    },
+    "loopy-publish.md": {
+      "project": "loopy",
+      "revision": "75966cbd572a4185064971c9fe5e9c52e8f8456d",
+      "upstream_path": "skills/loopy/references/publish.md",
+      "source": "https://github.com/Forward-Future/loopy/blob/75966cbd572a4185064971c9fe5e9c52e8f8456d/skills/loopy/references/publish.md",
+      "sha256": "d4a32db541fa9d619546046acd6adfc20f42c83cce5274d8f060acc9415f4e82",
+      "usage": "Pinned MIT reference, subordinate to the current EOG and user authority; not a legacy runtime."
+    }
+  }
+}

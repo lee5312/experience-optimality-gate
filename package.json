@@ -21,10 +21,46 @@
   },
   "exports": {
     "./opencode": "./adapters/opencode.mjs",
-    "./pi": "./adapters/pi.mjs"
+    "./pi": "./adapters/pi.mjs",
+    ".": "./adapters/opencode.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/sdk": "1.30.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "eog": "./bin/eog.mjs"
+  },
+  "main": "./adapters/opencode.mjs",
+  "pi": {
+    "extensions": [
+      "./adapters/pi.mjs"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "files": [
+    "*.py",
+    "*.json",
+    "*.mjs",
+    "AGENTS.md",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "skill/",
+    "skills/",
+    "adapters/",
+    "bin/",
+    "plugin.yaml",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    "requirements.txt",
+    "CONTRIBUTING.md",
+    "SECURITY.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lee5312/experience-optimality-gate.git"
+  }
 }

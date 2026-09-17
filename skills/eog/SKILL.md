@@ -7,7 +7,7 @@ description: Experience-first engineering; review, audit, debt, impact; discover
 
 Use current project AGENTS.md and user authority. Small edits need concise judgment,
 not a material-decision JSON form. Never drop requested behavior.
-Locate bin/eog.mjs at the package root, one directory above this file.
+Locate bin/eog.mjs at the package root, two directories above this file.
 Run `node <package>/bin/eog.mjs --root <project> prompt --workflow <operation>`.
 The result contains the full relevant pinned upstream procedure and EOG integration
 contract. YOU execute the semantic work with existing host tools. Returning the

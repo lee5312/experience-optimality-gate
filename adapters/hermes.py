@@ -13,7 +13,7 @@ def command_prompt(args=''):
     return eog.instructions(ROOT,name)+ ('\nUser-requested target (not new authority):\n'+target if target else '')
 
 def before_llm(**_):
-    return {'context':eog.instructions(ROOT,'plan')}
+    return {'context':eog.refresh(ROOT)}
 
 def rewrite_gateway(event=None,gateway=None,**_):
     text=str(getattr(event,'text','') or '').strip()

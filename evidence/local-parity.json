@@ -1,0 +1,130 @@
+{
+  "schema": "eog-parity-run-1",
+  "source_sha256": {
+    "__init__.py": "d43451f83c35c186e89c3ced5e20a686f0969d29c1e0face4328019a1381be66",
+    "eog.py": "b09541da3f97de15f89dd996cd13e1f02b98dcead794218880155fe8a97c856e",
+    "library_support.py": "ee015bfdee949dc80f9c2f4a08090c31d81ac04a7da949f4066b23eead7b8e09",
+    "observation_support.py": "8b07b22e48d1f231f06fd75a8ffbddc30f4adf814f45435ca7ed5b7189e22955",
+    "operation_support.py": "336fa3e8791738c5fe7cbec159a20372c3c558b30d94ea5471769bb858756228",
+    "test_absorption.py": "2bf16bff40d52ac1d4c6fe317b2310ecdf3610ef6a278d684c720dd7afa6fc80",
+    "test_eog.py": "e08dd58081e464f69e3429632b8d45c05b7a8a5c08bd137845c73874224a2ca3",
+    "test_runtime.py": "c518cd601e82c255bf30eb8069cfa0aa75c11f1d7b49cb4510e8ad1e1aa5325c",
+    "validate.py": "82fc28f6dd0000a0ebf96bf56a9c96df39bdbb0fa574d162736c27edb9f64646"
+  },
+  "results": [
+    {
+      "capability": "loopy.native-save",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_loopy_native_text_roundtrip_without_schema",
+        "test_absorption.AbsorptionTests.test_save_preserves_foreign_crlf_bytes",
+        "test_absorption.AbsorptionTests.test_stale_native_save_does_not_write",
+        "test_absorption.AbsorptionTests.test_native_explicit_update_preserves_sibling",
+        "test_absorption.AbsorptionTests.test_save_rejects_secret_shaped_input"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "loopy.native-reuse",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_legacy_markdown_quotes_read_and_search",
+        "test_absorption.AbsorptionTests.test_structured_and_native_saved_loops_coexist",
+        "test_absorption.AbsorptionTests.test_prompt_cannot_inject_structured_loop_entry"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "loopy.find-client",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_live_discovery_matches_body_and_limits_three",
+        "test_absorption.AbsorptionTests.test_provider_failure_is_not_published_absence",
+        "test_absorption.AbsorptionTests.test_catalog_cannot_supply_other_origin",
+        "test_absorption.AbsorptionTests.test_catalog_invalid_shape_and_duplicates_rejected"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "loopy.compare-client",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_compare_exposes_unknowns_without_inventing_authority"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "loopy.publish-client",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_publish_preview_checks_live_overlap_but_never_submits",
+        "test_absorption.AbsorptionTests.test_publish_permission_cannot_be_smuggled_into_candidate",
+        "test_absorption.AbsorptionTests.test_publish_unavailable_provider_blocks_before_submission",
+        "test_absorption.AbsorptionTests.test_publication_readback_binds_exact_prompt"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "eog.observation-admission",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_actual_command_observation_and_stale_subject",
+        "test_absorption.AbsorptionTests.test_failed_command_never_becomes_success",
+        "test_absorption.AbsorptionTests.test_fake_or_tampered_observations_fail_closed",
+        "test_absorption.AbsorptionTests.test_observation_admission_binds_current_git_and_work_owner",
+        "test_absorption.AbsorptionTests.test_read_only_library_stdin_rejects_write_and_root_override"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "eog.initialization",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_init_preview_preserves_existing_owner",
+        "test_absorption.AbsorptionTests.test_init_stale_write_rejected",
+        "test_absorption.AbsorptionTests.test_policy_crlf_and_bom_are_semantically_equal"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "eog.native-launcher",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_native_launcher_runs_real_cli"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    },
+    {
+      "capability": "eog.procedure-delivery",
+      "tests": [
+        "test_absorption.AbsorptionTests.test_preserved_reference_integrity_and_no_missing_fallback",
+        "test_absorption.AbsorptionTests.test_all_original_operation_routes_reach_detailed_procedures",
+        "test_absorption.AbsorptionTests.test_legacy_command_alias_reaches_same_operation",
+        "test_absorption.AbsorptionTests.test_refresh_is_bounded_not_full_procedure_dump"
+      ],
+      "result": "passed",
+      "kind": "local_operation_or_provider_fixture",
+      "native_host_verified": false,
+      "model_behavior_verified": false
+    }
+  ],
+  "upstream_local_runtime_imported": false,
+  "replacement_ready": false,
+  "limits": "Client semantics under explicit local/provider fixtures. Procedure delivery is not model behavior; actual host loading and service publication are separate observations."
+}
