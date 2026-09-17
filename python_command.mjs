@@ -5,7 +5,7 @@ export function pythonCommand() {
   if (cached) return cached;
   const explicit=process.env.EOG_PYTHON;
   const candidates=explicit?[[explicit,[]]]:process.platform==='win32'?
-    [['py',['-3']],['python3',[]],['python',[]]]:[['python3',[]],['python',[]]];
+    [['python',[]],['py',['-3']],['python3',[]]]:[['python3',[]],['python',[]]];
   for (const [command,args] of candidates) {
     const r=spawnSync(command,[...args,'-c','import sys; print("EOG_PYTHON_OK" if sys.version_info >= (3,11) else "OLD")'],
       {encoding:'utf8',timeout:4000,windowsHide:true,stdio:['ignore','pipe','pipe']});
