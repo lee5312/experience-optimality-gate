@@ -67,9 +67,9 @@ node bin/eog.mjs --root /path/to/project prompt --workflow review
 
 The existing agent executes the requested procedure using its normal tools.
 The prompt command itself only supplies instructions, not a completed review.
-On Windows the launcher tries the installed Python launcher (`py -3`) before
-Python executables; EOG_PYTHON can explicitly select an executable. It never
-installs Python or changes a user profile. The Python CLI also works directly.
+On Windows the launcher prefers the active `python` environment first, then
+falls back to `py -3`/`python3`; `EOG_PYTHON` can explicitly select an executable.
+It never installs Python or changes a user profile. The Python CLI also works directly.
 
 ## Operations, not another runtime
 
