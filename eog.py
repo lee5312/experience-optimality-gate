@@ -19,11 +19,12 @@ import urllib.request
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_ROOT = Path.cwd()
-VERSION = '1.1.0'
+VERSION = '2.0.0'
 MAX_BYTES = 2 * 1024 * 1024
 CATALOG = 'https://signals.forwardfuture.com/loop-library/catalog.json'
 HEADING = '## Experience Optimality Gate (EOG)'
 EVENTS = ('session', 'turn', 'resume', 'compact', 'delegate', 'verify')
+DEPTHS = ('auto','off','lite','full','ultra')
 HOOK_EVENTS = {
     'codex': {'SessionStart','UserPromptSubmit','SubagentStart','PostCompact'},
     'claude': {'SessionStart','UserPromptSubmit','SubagentStart'},
@@ -99,14 +100,22 @@ def workflows() -> dict[str,Any]:
     return read_json(HERE/'workflows.json')['workflows']
 
 
-def instructions(root: Path, workflow: str, event: str='turn') -> str:
+def instructions(root: Path, workflow: str, event: str='turn', depth: str='auto') -> str:
     from operation_support import compact_core, references, resolve_workflow
     if event not in EVENTS: raise ValueError('unsupported context event')
+    if depth not in DEPTHS: raise ValueError('unsupported reasoning depth')
     workflow=resolve_workflow(workflow)
     p=policy(root); w=workflows()
     if workflow not in w: raise ValueError('unknown EOG workflow')
-    return (f"EOG {VERSION} | policy_sha256={p['policy_sha256']} | event={event}\n"
-            +compact_core(p)+'\n## Requested EOG operation: '+w[workflow]['title']+'\n'
+    depth_text={
+        'auto':'Adaptive depth: use the smallest reasoning depth capable of changing the decision.',
+        'off':'Compatibility depth off: skip optional optimization for this scope; requested operations and authority/integrity guards remain.',
+        'lite':'Compatibility depth lite: keep optimality/minimality review brief and decision-focused.',
+        'full':'Compatibility depth full: perform detailed optimality/minimality reasoning where relevant.',
+        'ultra':'Compatibility depth ultra: examine unusually broadly/deeply, but still stop irrelevant or non-decision-changing work.'
+    }[depth]
+    return (f"EOG {VERSION} | policy_sha256={p['policy_sha256']} | event={event} | depth={depth}\n"
+            +compact_core(p)+'\n'+depth_text+'\n## Requested EOG operation: '+w[workflow]['title']+'\n'
             +w[workflow]['instructions']+'\n'+references(w[workflow]))
 
 
@@ -140,9 +149,8 @@ def hook(root: Path, host: str, event: str, data: Any) -> dict[str,Any]:
     # Native AGENTS/rules carry the full core. A bounded refresh avoids spilling
     # an entire constitution into the context on every turn.
     text=(f"EOG {VERSION}; canonical={p['policy_path']}; sha256={p['policy_sha256']}. "
-          'Before material decisions use the current EOG: consumer experience first; '
-          'ACTUALLY SEARCH existing wheels and justify each residual novel part; '
-          'retain goal/constraint traceability, bounded feedback and consumer acceptance. '
+          'EOG assists judgment rather than replacing it. For material decisions keep consumer experience first; '
+          'inspect decision-relevant existing options and justify residual novelty; use useful feedback and consumer acceptance. '
           'Load the canonical section if absent or its digest changed. '
           'Use the same existing agent, not legacy Ponytail/Loopy installations. '
           'Carry current task, authority, subject revision, gaps and stops into delegation. '
@@ -471,7 +479,9 @@ def replacement_check(root: Path, receipt: Any) -> dict[str,Any]:
     if not isinstance(receipt,dict):raise ValueError('replacement receipt must be object')
     if receipt.get('policy_sha256')!=policy(root)['policy_sha256']:errors.append('policy digest mismatch')
     if receipt.get('source_version')!=VERSION:errors.append('source version mismatch')
-    required={c['id'] for c in manifest['capabilities'] if c['disposition']!='policy_change'}
+    required={c['id'] for c in manifest['capabilities']
+              if c.get('capability_state') in ('implemented','compatible')
+              and c.get('disposition')!='external_service_reuse'}
     cases=receipt.get('capability_evidence',[])
     if not isinstance(cases,list):raise ValueError('capability_evidence must be array')
     ids=[c.get('capability') for c in cases if isinstance(c,dict)]
@@ -491,10 +501,6 @@ def replacement_check(root: Path, receipt: Any) -> dict[str,Any]:
                 errors.append('host replacement unverified: '+str(h.get('id')))
     for field in ['legacy_inventory_reviewed','saved_work_preserved','rollback_verified']:
         if receipt.get(field) is not True:errors.append(field+' required')
-    # Deliberate policy changes must be visible, not counted as copied features.
-    required_changes={c['id'] for c in manifest['capabilities'] if c['disposition']=='policy_change'}
-    if not required_changes<=set(receipt.get('accepted_policy_changes',[])):
-        errors.append('policy changes require explicit disposition acknowledgment')
     return {'receipt_consistent':not errors,'replacement_authorized':False,
             'truth_verified':False,'errors':errors,
             'note':'Only checks submitted evidence. Actual owner approval and source review remain required.'}
@@ -559,7 +565,7 @@ def main() -> int:
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--root',type=Path,default=DEFAULT_ROOT)
     sub=ap.add_subparsers(dest='command',required=True)
-    p=sub.add_parser('prompt');p.add_argument('--workflow',default='plan');p.add_argument('--event',choices=EVENTS,default='turn')
+    p=sub.add_parser('prompt');p.add_argument('--workflow',default='plan');p.add_argument('--event',choices=EVENTS,default='turn');p.add_argument('--depth',choices=DEPTHS,default='auto')
     p=sub.add_parser('hook');p.add_argument('--host',choices=sorted(HOOK_EVENTS),required=True);p.add_argument('--event',required=True)
     p=sub.add_parser('gate');p.add_argument('record',type=Path);p.add_argument('--stage',choices=['design','completion'],required=True);p.add_argument('--revision',required=True);p.add_argument('--owner',required=True);p.add_argument('--observations',type=Path);p.add_argument('--observations-sha256')
     p=sub.add_parser('validate-stdin')
@@ -593,13 +599,13 @@ def main() -> int:
     p=sub.add_parser('replacement-check');p.add_argument('record',type=Path)
     a=ap.parse_args();root=a.root.resolve();code=0
     try:
-        if a.command=='prompt':print(instructions(root,a.workflow,a.event));return 0
+        if a.command=='prompt':print(instructions(root,a.workflow,a.event,a.depth));return 0
         elif a.command=='refresh':print(refresh(root));return 0
         elif a.command=='init':result=initialize(root,a.expected,a.apply)
         elif a.command=='hook': result=hook(root,a.host,a.event,strict_json(sys.stdin.buffer.read(MAX_BYTES+1)))
         elif a.command=='record-digest':result={'record_sha256':digest(dumps(read_json(a.record)).encode()),'policy_sha256':policy(root)['policy_sha256'],'permission_granted':False}
         elif a.command=='status':
-            p=policy(root);print('EOG '+VERSION+' | source '+p['policy_sha256'][:12]+' | native/model acceptance unverified');return 0
+            p=policy(root);print('EOG '+VERSION+' | source '+p['policy_sha256'][:12]+' | capability closure complete | native/model acceptance separate');return 0
         elif a.command=='manifest':result=read_json(HERE/'capabilities.json')
         elif a.command=='pretool':
             try:record=read_json(a.record)

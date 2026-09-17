@@ -8,7 +8,7 @@ ALIASES = {
     'ponytail': 'plan', 'ponytail-review': 'review', 'ponytail-audit': 'audit',
     'ponytail-debt': 'debt', 'ponytail-gain': 'impact', 'gain': 'impact',
     'ponytail-help': 'help', 'loopy': 'help', 'loop-library': 'help',
-    'repair': 'loop-repair', 'loop-doctor': 'loop-audit',
+    'loop-repair': 'repair', 'loop-doctor': 'loop-audit', 'uog': 'plan',
 }
 
 
@@ -17,29 +17,28 @@ def resolve_workflow(name):
 
 
 def compact_core(policy):
-    # The compact projection is valid only for this exact bundled policy.
-    # Custom or amended project policy must never be silently compressed away.
+    # Compact cognitive guidance is valid only for the exact bundled policy.
+    # Custom/amended policy is delivered in full rather than silently compressed.
     from eog import policy as read_policy
     if policy['policy_sha256'] != read_policy(HERE)['policy_sha256']:
         return policy['text']
     return (
         '## Experience Optimality Gate (EOG)\n'
-        'Consumer experience is the objective, including failure and continuity. '
-        'Derive requirements; preserve explicit scope, constraints and authority.\n'
-        '### Mandatory existing-wheel search\n'
-        'Inspect relevant actual code, callers, standard/native capabilities and existing '
-        'tools before material novelty. Compare reuse/configure/compose/adapt/extend/build; '
-        'justify the residual gap. Do not turn a known local fix into a market survey.\n'
-        'Prefer the lowest-burden solution that meets the required experience, not the '
-        'fewest lines at the expense of security, data, accessibility or requested behavior. '
-        'Observe, choose one bounded action, act, verify, then continue only with informative '
-        'feedback. Re-read consequential state. Preserve unrelated work and user Stop.\n'
-        'Component tests are not consumer completion; structural validity is not truth, '
-        'permission or deployment. Bind observations to the current subject revision. '
-        'Report failures and missing evidence rather than inventing success.\n'
-        'Use the current agent and tools. Small deterministic edits need concise judgment, '
-        'not a JSON form. Load the requested detailed operation only when needed. '
-        'Do not invent a schedule, budget, metric, owner or approval. '
+        'EOG assists judgment; it is not a compulsory state machine. Experience before machinery. '
+        'Requirements are not mechanisms. Existing solutions are first-class candidates.\n'
+        'For material novelty, inspect only decision-relevant existing/native/installed/standard/'
+        'product/OSS options and own only the residual responsibility. Prefer reuse/configure/'
+        'compose/adapt/extend/build when experience and constraints hold.\n'
+        'Compare feasible candidates without fake precision; investigate only uncertainty that can '
+        'change feasibility, the non-dominated set, residual novelty, or commitment.\n'
+        'Use useful feedback: observe, take one bounded action, verify, and continue only when new '
+        'evidence can change the next action. Do not manufacture loops or ceremony.\n'
+        'Hard guards are narrow: authority, write integrity, stale evidence, canonical ownership, '
+        'unsupported machine-readable completion, external consequence, and protected data. '
+        'They do not choose architecture or search depth.\n'
+        'Component success is not consumer completion; structural validity is not truth or permission. '
+        'Small deterministic edits need concise judgment, not a JSON form. Load a deep method only '
+        'when it can change the decision or perform a requested operation.\n'
         'For material decisions or changed instructions, read the full current policy at '
         + policy['policy_path'] + '; sha256=' + policy['policy_sha256'] + '.\n'
     )

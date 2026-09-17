@@ -3,7 +3,7 @@ import {Server} from '@modelcontextprotocol/sdk/server/index.js';
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
 import {ListToolsRequestSchema,CallToolRequestSchema,ListPromptsRequestSchema,GetPromptRequestSchema} from '@modelcontextprotocol/sdk/types.js';
 import {context,invoke,workflows} from './bridge.mjs';
-const server=new Server({name:'eog',version:'1.1.0'},{capabilities:{tools:{},prompts:{}}});
+const server=new Server({name:'eog',version:'2.0.0'},{capabilities:{tools:{},prompts:{}}});
 const operations=Object.keys(workflows);
 const tools=[
   {name:'eog_instructions',description:'Read canonical EOG plus one workflow; does not execute it or inject every turn.',inputSchema:{type:'object',properties:{workflow:{type:'string',enum:operations}},additionalProperties:false}},

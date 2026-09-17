@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "2.0.0",
   "evaluation_kind": "actual model-and-tool behavior, not schema unit tests",
   "execution": "Use existing authorized agent/model. Record transcript, observed tool operations, subject/policy revision, independent rubric result and real usage. No paid call is automatically started.",
   "cases": [
