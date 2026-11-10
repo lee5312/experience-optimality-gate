@@ -54,6 +54,12 @@ EOG reuses the existing provider for catalog/hosting/account/voting. It implemen
 
 EOG includes pinned MIT-licensed Ponytail and Loopy procedure text with exact revisions and hashes in `reference-lock.json` and `THIRD_PARTY_NOTICES.md`. UOG originated as Paralloff's experience-optimality method and is generalized into the EOG Judgment/Optimality core.
 
+## E2B for Startups
+
+[![SPONSORED BY E2B FOR STARTUPS](https://img.shields.io/badge/SPONSORED%20BY-E2B%20FOR%20STARTUPS-ff3001?style=for-the-badge&labelColor=black)](https://e2b.dev/startups)
+
+Paralloff was accepted into [E2B for Startups](https://e2b.dev/startups) on November 9, 2026, with $20,000 in execution credits and E2B Pro. Thank you to E2B for supporting our experiments with isolated code execution. On November 10, we used an E2B sandbox to run code, write and read a file, reconnect, and verify shutdown.
+
 ## License
 
 MIT. See `LICENSE`.
